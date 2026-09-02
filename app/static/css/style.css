@@ -35,7 +35,7 @@
 
   --tint-gradient: var(--tint-gradient);
 
-  --nav-bg: rgba(9, 9, 11, 0.62);
+  --nav-bg: rgba(9, 9, 11, 0.94);
   --nav-bg-solid: rgba(8, 8, 10, 0.92);
   --nav-panel-bg: rgba(10, 10, 12, 0.98);
   --topbar-gradient: linear-gradient(90deg, #0d0d10, #151519);
@@ -110,7 +110,7 @@
 
   --tint-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(228, 228, 233, 0.65));
 
-  --nav-bg: rgba(250, 250, 252, 0.7);
+  --nav-bg: rgba(250, 250, 252, 0.94);
   --nav-bg-solid: rgba(248, 248, 250, 0.94);
   --nav-panel-bg: rgba(250, 250, 252, 0.98);
   --topbar-gradient: linear-gradient(90deg, #e9e9ec, #f7f7f9);
@@ -167,6 +167,7 @@ body {
   line-height: 1.65;
   color: var(--text);
   background-color: var(--bg);
+  padding-top: 132px;
   background-image:
     radial-gradient(1200px 700px at 80% -10%, var(--glow-1), transparent 60%),
     radial-gradient(900px 600px at -10% 30%, var(--glow-2), transparent 55%);
@@ -400,9 +401,12 @@ h1, h2, h3, h4 {
    HEADER
    ============================================================ */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 60;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 66;
 }
 
 .top-bar {
@@ -465,8 +469,6 @@ h1, h2, h3, h4 {
 /* ----- Navbar ----- */
 .navbar {
   background: var(--nav-bg);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
   border-bottom: 1px solid transparent;
   transition: background 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }

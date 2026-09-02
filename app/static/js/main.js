@@ -75,6 +75,13 @@
   applyTheme(currentTheme());
 
   /* ---------- Header ao rolar ---------- */
+  function syncHeaderSpace() {
+    if (!header) return;
+    var h = header.offsetHeight;
+    doc.body.style.paddingTop = h + "px";
+    doc.body.style.setProperty("--header-total", h + "px");
+  }
+
   function onScroll() {
     if (!header) return;
     if (window.scrollY > 10) {
@@ -82,8 +89,10 @@
     } else {
       header.classList.remove("is-scrolled");
     }
+    syncHeaderSpace();
   }
   window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", syncHeaderSpace);
   onScroll();
 
   /* ---------- Menu móvel ---------- */
