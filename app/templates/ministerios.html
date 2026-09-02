@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <a href="{{ url_for('main.index') }}">Início</a>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      <span>Ministérios</span>
+    </nav>
+    <span class="eyebrow eyebrow--hero">Ministérios</span>
+    <h1 class="page-hero__title">Um chamado para <span class="text-gradient">cada pessoa</span></h1>
+    <p class="page-hero__text">
+      Cada ministério existe para servir, edificar e fazer a igreja avançar.
+      Descubra onde os seus dons podem florescer.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="ministries-grid ministries-grid--all">
+      {% for ministry in site.ministries %}
+        {% set card_delay = loop.index0 * 60 %}
+        {% include "components/ministry_card.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tinted">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Como participar',
+        'Três passos simples para servir',
+        'Não importa se você chegou ontem: há um lugar de serviço para você.'
+    ) }}
+
+    <div class="steps">
+      <article class="step" data-reveal="fade-up">
+        <span class="step__num">1</span>
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        <h3>Chame no WhatsApp</h3>
+        <p>Converse com nossa equipe e informe que deseja servir em um ministério.</p>
+      </article>
+      <article class="step" data-reveal="fade-up" data-delay="120">
+        <span class="step__num">2</span>
+        <i class="fa-solid fa-handshake-angle" aria-hidden="true"></i>
+        <h3>Conheça o ministério</h3>
+        <p>Participe de um encontro, conheça a liderança e veja onde você melhor encaixa.</p>
+      </article>
+      <article class="step" data-reveal="fade-up" data-delay="240">
+        <span class="step__num">3</span>
+        <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+        <h3>Floresça servindo</h3>
+        <p>Comece a servir com acompanhamento, discipulado e muito crescimento.</p>
+      </article>
+    </div>
+
+    <div class="section-cta" data-reveal="fade-up">
+      <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        Quero servir em um ministério
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

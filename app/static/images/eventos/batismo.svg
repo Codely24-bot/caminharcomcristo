@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="">
+  <defs>
+    <linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0a0c"/>
+      <stop offset="1" stop-color="#1b1b21"/>
+    </linearGradient>
+    <linearGradient id="bwater" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#26262c"/>
+      <stop offset="1" stop-color="#121216"/>
+    </linearGradient>
+    <linearGradient id="bsun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#a6a7ad"/>
+    </linearGradient>
+    <radialGradient id="bhalo" cx="0.5" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bsky)"/>
+  <rect width="800" height="450" fill="url(#bhalo)"/>
+
+  <g fill="#ffffff" opacity="0.7">
+    <circle cx="110" cy="80" r="3"/><circle cx="260" cy="120" r="2"/>
+    <circle cx="650" cy="70" r="2.4"/><circle cx="540" cy="150" r="2"/>
+    <circle cx="720" cy="180" r="2.2"/>
+  </g>
+
+  <circle cx="400" cy="150" r="86" fill="url(#bsun)"/>
+  <circle cx="400" cy="150" r="120" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="3" stroke-dasharray="5 14"/>
+
+  <path d="M0 300 C 200 240, 420 290, 600 250 C 700 226, 760 250, 800 230 L 800 450 L 0 450 Z" fill="#16161a"/>
+
+  <path d="M0 320 C 180 300, 320 340, 480 318 C 620 300, 700 330, 800 310 L 800 450 L 0 450 Z" fill="url(#bwater)"/>
+  <path d="M0 360 C 200 340, 420 380, 620 356 C 700 348, 760 366, 800 352 L 800 450 L 0 450 Z" fill="#0d0d10" opacity="0.85"/>
+
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round">
+    <path d="M120 350 q20 -10 40 0 t40 0"/>
+    <path d="M380 340 q20 -10 40 0 t40 0"/>
+    <path d="M640 358 q20 -10 40 0 t40 0"/>
+    <path d="M220 390 q20 -10 40 0 t40 0"/>
+    <path d="M500 386 q20 -10 40 0 t40 0"/>
+  </g>
+
+  <g fill="url(#bsun)">
+    <rect x="388" y="120" width="10" height="150" rx="5"/>
+    <rect x="352" y="152" width="82" height="10" rx="5"/>
+  </g>
+
+  <g fill="#8f929b" opacity="0.8">
+    <circle cx="470" cy="258" r="4"/>
+    <circle cx="496" cy="278" r="3"/>
+    <circle cx="322" cy="266" r="3.5"/>
+  </g>
+</svg>

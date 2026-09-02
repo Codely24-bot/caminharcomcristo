@@ -1,0 +1,11 @@
+<div class="service-card" data-reveal="fade-up" data-delay="{{ card_delay | default(0) }}">
+  <div class="service-card__icon" aria-hidden="true">
+    <i class="{{ service.icon }}"></i>
+  </div>
+  <div class="service-card__meta">
+    <span class="chip chip--soft">{{ service.day }}</span>
+    <span class="service-card__time">{{ service.time }}</span>
+  </div>
+  <h3 class="service-card__name">{{ service.name }}</h3>
+  <p class="service-card__desc">{{ service.description }}</p>
+</div>

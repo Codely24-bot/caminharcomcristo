@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 880" role="img" aria-label="">
+  <defs>
+    <linearGradient id="csky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0a0c"/>
+      <stop offset="1" stop-color="#1b1b21"/>
+    </linearGradient>
+    <linearGradient id="csun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#a6a7ad"/>
+    </linearGradient>
+    <linearGradient id="chill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#26262c"/>
+      <stop offset="1" stop-color="#131317"/>
+    </linearGradient>
+    <radialGradient id="chalo" cx="0.5" cy="0.28" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="880" fill="url(#csky)"/>
+  <rect width="800" height="880" fill="url(#chalo)"/>
+
+  <g fill="#ffffff" opacity="0.7">
+    <circle cx="120" cy="130" r="3"/><circle cx="300" cy="90" r="2.2"/>
+    <circle cx="560" cy="150" r="2.6"/><circle cx="700" cy="100" r="2"/>
+    <circle cx="430" cy="60" r="1.8"/><circle cx="660" cy="240" r="2.2"/>
+  </g>
+
+  <circle cx="400" cy="240" r="110" fill="url(#csun)"/>
+  <circle cx="400" cy="240" r="150" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="3" stroke-dasharray="5 14"/>
+
+  <path d="M0 640 C 180 540, 360 620, 520 560 C 660 510, 730 560, 800 520 L 800 880 L 0 880 Z" fill="url(#chill)"/>
+  <path d="M0 720 C 200 620, 420 700, 640 640 C 720 616, 770 640, 800 610 L 800 880 L 0 880 Z" fill="#08080a"/>
+
+  <path d="M0 690 C 160 600, 320 672, 520 622" fill="none" stroke="#ffffff" stroke-width="7" stroke-opacity="0.28" stroke-linecap="round"/>
+
+  <g fill="#08080a">
+    <circle cx="180" cy="600" r="16"/>
+    <path d="M166 618 q6 -8 14 -8 q8 0 14 8 l10 12 -6 4 -10 -8 -8 6 -6 -4 z"/>
+    <circle cx="318" cy="612" r="15"/>
+    <path d="M305 630 q6 -8 13 -8 q7 0 13 8 l9 11 -5 4 -9 -7 -8 5 -5 -4 z"/>
+    <circle cx="410" cy="646" r="11"/>
+    <path d="M400 659 q5 -6 10 -6 t10 6 l8 9 -5 3 -7 -6 -6 4 -5 -3 z"/>
+    <circle cx="486" cy="606" r="15"/>
+    <path d="M473 624 q6 -8 13 -8 q7 0 13 8 l9 11 -5 4 -9 -7 -8 5 -5 -4 z"/>
+  </g>
+
+  <g fill="#ffffff">
+    <circle cx="646" cy="560" r="3" opacity="0.4"/>
+    <circle cx="666" cy="546" r="4" opacity="0.6"/>
+    <circle cx="690" cy="540" r="5" opacity="0.8"/>
+  </g>
+</svg>

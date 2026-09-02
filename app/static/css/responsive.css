@@ -1,0 +1,306 @@
+/* ============================================================
+   IGREJA CAMINHAR — responsive.css
+   Consultas mobile-first (min-width). Também ajusta o menu
+   móvel para telas menores que 1024px.
+   ============================================================ */
+
+/* ===================== < 640px ===================== */
+.top-bar__info a:nth-of-type(2) {
+  display: none;
+}
+
+.hero {
+  min-height: auto;
+}
+
+.hero__scroll {
+  display: none;
+}
+
+/* ===================== >= 560px ===================== */
+@media (min-width: 560px) {
+  .form__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .message-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .message-card__media {
+    width: 112px;
+    height: 112px;
+  }
+}
+
+/* ===================== >= 640px ===================== */
+@media (min-width: 640px) {
+  .services-grid,
+  .ministries-grid,
+  .events-grid,
+  .ministries-grid--all,
+  .services-grid--all,
+  .events-grid--all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats__inner {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .value-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* O último bloco (contato) ocupa a linha inteira */
+  .footer-grid .footer-col:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ===================== >= 768px ===================== */
+@media (min-width: 768px) {
+  .hero__next-service {
+    max-width: 420px;
+  }
+}
+
+/* ===================== >= 992px ===================== */
+@media (min-width: 992px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.9fr);
+  }
+
+  .hero {
+    min-height: calc(100svh - var(--header-h) - 44px);
+    padding-block: clamp(3.5rem, 8vh, 6rem) 4rem;
+  }
+
+  .about-section__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+
+  .about-detail__grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+
+  .cultos-split {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .contact-grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+
+  .services-grid,
+  .ministries-grid,
+  .events-grid,
+  .ministries-grid--all,
+  .services-grid--all,
+  .events-grid--all {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .value-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===================== >= 1200px ===================== */
+@media (min-width: 1200px) {
+  .footer-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+  }
+
+  .footer-grid .footer-col:last-child {
+    grid-column: auto;
+  }
+}
+
+/* ============================================================
+   MENU MÓVEL (< 1024px)
+   ============================================================ */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 0;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-cta {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    margin: 0.8rem 0 0;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(80vw, 360px);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.25rem;
+    padding: calc(var(--header-h) + 1.5rem) 2rem 2rem;
+    background: var(--nav-panel-bg);
+    border-left: 1px solid var(--line-strong);
+    box-shadow: -24px 0 60px rgba(0, 0, 0, 0.5);
+    transform: translateX(105%);
+    visibility: hidden;
+    transition: transform 0.4s var(--ease), visibility 0.4s;
+    z-index: 65;
+    overflow-y: auto;
+  }
+
+  .nav-links.is-open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .nav-links li {
+    width: 100%;
+  }
+
+  .nav-link {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 0.6rem;
+    font-size: 1.05rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .nav-link--active {
+    background: rgba(233, 234, 236, 0.1);
+    color: var(--accent-2);
+  }
+
+  .nav-link::after {
+    left: 0.6rem;
+    right: auto;
+    width: 34px;
+  }
+
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 11, 22, 0.6);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--ease), visibility 0.35s;
+    z-index: 64;
+  }
+
+  .nav-backdrop.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  html.menu-open {
+    overflow: hidden;
+  }
+}
+
+/* ============================================================
+   < 480px (ajustes finos)
+   ============================================================ */
+@media (max-width: 480px) {
+  .brand__text small {
+    display: none;
+  }
+
+  .brand__text strong {
+    font-size: 0.95rem;
+  }
+
+  .top-bar__services {
+    display: none;
+  }
+
+  .top-bar {
+    height: 40px;
+  }
+
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .stats__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .message-card {
+    text-align: center;
+  }
+
+  .message-card__media {
+    margin-inline: auto;
+  }
+
+  .message-card__meta,
+  .message-card__info {
+    justify-content: center;
+  }
+
+  .verse-of-day {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .verse-of-day__icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .verse-of-day__ref {
+    justify-content: center;
+  }
+
+  .contact-form-wrap {
+    padding: 1.4rem;
+  }
+
+  .footer-bottom {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .wa-float {
+    width: 54px;
+    height: 54px;
+    font-size: 1.5rem;
+    right: 0.9rem;
+    bottom: 0.9rem;
+  }
+}
+
+/* Garantia contra scroll horizontal */
+@media (max-width: 1023px) {
+  .top-bar__info,
+  .navbar__inner {
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+}

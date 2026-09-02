@@ -1,0 +1,10 @@
+<div class="ministry-card" data-reveal="fade-up" data-delay="{{ card_delay | default(0) }}">
+  <div class="ministry-card__icon" aria-hidden="true">
+    <i class="{{ ministry.icon }}"></i>
+  </div>
+  <h3 class="ministry-card__name">{{ ministry.name }}</h3>
+  <p class="ministry-card__desc">{{ ministry.summary }}</p>
+  <a href="{{ url_for('main.contato') }}#form" class="ministry-card__link">
+    Quero participar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+  </a>
+</div>

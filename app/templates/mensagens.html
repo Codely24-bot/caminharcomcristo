@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <a href="{{ url_for('main.index') }}">Início</a>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      <span>Mensagens</span>
+    </nav>
+    <span class="eyebrow eyebrow--hero">Mensagens</span>
+    <h1 class="page-hero__title">Palavras que <span class="text-gradient">movem a caminhada</span></h1>
+    <p class="page-hero__text">
+      Releia e compartilhe as mensagens ministradas em nossos cultos.
+      A Palavra de Deus é viva e fala ao seu momento.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tinted">
+  <div class="container">
+    {% if daily_verse and daily_verse.get("text") %}
+      <div class="verse-of-day" data-reveal="fade-up" id="verse-of-day">
+        <div class="verse-of-day__icon" aria-hidden="true">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div class="verse-of-day__body">
+          <span class="eyebrow">Versículo do dia</span>
+          <blockquote class="verse-of-day__text" id="verse-of-day-text">{{ daily_verse.text }}</blockquote>
+          <cite class="verse-of-day__ref">
+            <span id="verse-of-day-ref">{{ daily_verse.reference }}</span>
+            <span class="verse-of-day__translation">{{ daily_verse.translation }}</span>
+          </cite>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="message-filter" data-reveal="fade-up">
+      <button type="button" class="chip-btn is-active" data-filter="all">Todas</button>
+      {% set tags = site.messages | map(attribute='tag') | unique | list %}
+      {% for tag in tags %}
+        <button type="button" class="chip-btn" data-filter="{{ tag|lower }}">{{ tag }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="message-list">
+      {% for message in site.messages %}
+        {% set verse = message_verses[loop.index0] if message_verses and message_verses[loop.index0] and message_verses[loop.index0].get("text") else None %}
+        <article class="message-card" data-reveal="fade-up" data-category="{{ message.tag|lower }}" data-delay="{{ loop.index0 * 60 }}" data-ref="{{ message.reference }}" {% if verse %}data-verse-ready="true"{% endif %}>
+          <div class="message-card__media" aria-hidden="true">
+            <span class="message-card__icon"><i class="{{ message.icon }}"></i></span>
+            <button type="button" class="message-card__play" aria-label="Reproduzir {{ message.title }}">
+              <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+          <div class="message-card__body">
+            <div class="message-card__meta">
+              <span class="chip chip--soft">{{ message.tag }}</span>
+              <span class="message-card__date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> {{ message.date }}</span>
+              <span class="message-card__duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ message.duration }}</span>
+            </div>
+            <h3 class="message-card__title">{{ message.title }}</h3>
+            <p class="message-card__info">
+              <i class="fa-solid fa-user-tie" aria-hidden="true"></i> {{ message.speaker }}
+              <span aria-hidden="true">·</span>
+              <i class="fa-solid fa-book-bible" aria-hidden="true"></i> {{ message.reference }}
+            </p>
+            {% if verse %}
+              <blockquote class="message-card__verse">
+                <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+                <span class="message-card__verse-text">{{ verse.text }}</span>
+                <span class="message-card__verse-ref">— {{ verse.reference }}</span>
+              </blockquote>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+
+    <div class="section-cta" data-reveal="fade-up">
+      <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        Pedir o material da mensagem
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

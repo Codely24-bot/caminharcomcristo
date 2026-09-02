@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="">
+  <defs>
+    <linearGradient id="nsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0a0c"/>
+      <stop offset="1" stop-color="#1c1c22"/>
+    </linearGradient>
+    <linearGradient id="nstar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#c2c3c9"/>
+    </linearGradient>
+    <linearGradient id="nchurch" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#26262c"/>
+      <stop offset="1" stop-color="#101014"/>
+    </linearGradient>
+    <linearGradient id="nsnow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#121216"/>
+      <stop offset="1" stop-color="#08080a"/>
+    </linearGradient>
+    <radialGradient id="nhalo" cx="0.5" cy="0.22" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#nsky)"/>
+  <rect width="800" height="450" fill="url(#nhalo)"/>
+
+  <g transform="translate(400 96)">
+    <path d="M0 -26 L 7 -8 L 26 -8 L 10 3 L 16 22 L 0 11 L -16 22 L -10 3 L -26 -8 L -7 -8 Z" fill="url(#nstar)"/>
+  </g>
+  <circle cx="400" cy="96" r="6" fill="#fff6d8"/>
+  <g fill="#ffffff" opacity="0.85">
+    <polygon points="400,54 396,74 404,74"/>
+    <polygon points="400,138 396,118 404,118"/>
+    <polygon points="346,96 366,100 366,92"/>
+    <polygon points="454,96 434,100 434,92"/>
+    <polygon points="354,72 370,88 364,94"/>
+    <polygon points="446,120 430,104 436,98"/>
+  </g>
+
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="140" cy="80" r="3"/><circle cx="700" cy="70" r="3"/>
+    <circle cx="240" cy="160" r="2.2"/><circle cx="620" cy="140" r="2.4"/>
+    <circle cx="90" cy="200" r="2"/><circle cx="720" cy="210" r="2.2"/>
+  </g>
+
+  <path d="M0 330 C 200 250, 420 320, 620 260 C 700 236, 760 260, 800 240 L 800 450 L 0 450 Z" fill="url(#nchurch)"/>
+
+  <g fill="#08080a">
+    <path d="M330 330 L380 250 L430 330 Z"/>
+    <path d="M392 250 l0 80"/>
+    <rect x="336" y="330" width="128" height="70" rx="8"/>
+    <path d="M352 330 v16 M376 330 v28 M400 330 v34 M424 330 v24 M448 330 v14" stroke="#ffffff" stroke-width="4" stroke-opacity="0.85" stroke-linejoin="round"/>
+    <circle cx="400" cy="330" r="16" fill="none" stroke="#ffffff" stroke-width="3" stroke-opacity="0.9"/>
+  </g>
+
+  <g fill="#141418">
+    <polygon points="120,370 150,300 180,370"/>
+    <polygon points="135,330 150,268 165,330"/>
+    <polygon points="660,360 690,290 720,360"/>
+    <polygon points="676,325 690,260 704,325"/>
+  </g>
+
+  <path d="M0 380 C 200 360, 420 390, 620 372 C 700 366, 760 380, 800 368 L 800 450 L 0 450 Z" fill="url(#nsnow)"/>
+  <g fill="#ffffff" opacity="0.85">
+    <circle cx="100" cy="345" r="3"/><circle cx="180" cy="400" r="3"/>
+    <circle cx="330" cy="420" r="2.5"/><circle cx="520" cy="408" r="3"/>
+    <circle cx="700" cy="430" r="2.5"/><circle cx="620" cy="350" r="2.5"/>
+  </g>
+
+  <g fill="none" stroke="#ffffff" opacity="0.5" stroke-width="3" stroke-linecap="round">
+    <path d="M150 330 q14 -18 28 0"/><path d="M330 345 q14 -18 28 0"/>
+  </g>
+</svg>

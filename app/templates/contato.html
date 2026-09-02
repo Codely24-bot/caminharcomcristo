@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-hero page-hero--short">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <a href="{{ url_for('main.index') }}">Início</a>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      <span>Contato</span>
+    </nav>
+    <span class="eyebrow eyebrow--hero">Fale conosco</span>
+    <h1 class="page-hero__title">Será um prazer <span class="text-gradient">receber você</span></h1>
+    <p class="page-hero__text">
+      Tire dúvidas, peça oração ou agende sua visita. Respondemos rapidinho.
+    </p>
+  </div>
+</section>
+
+<section class="section contact-section">
+  <div class="container contact-grid">
+
+    <div class="contact-info" data-reveal="fade-up">
+      <div class="contact-info__card">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        <div>
+          <strong>WhatsApp</strong>
+          <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer">{{ site.phone }}</a>
+        </div>
+      </div>
+      <div class="contact-info__card">
+        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+        <div>
+          <strong>E-mail</strong>
+          <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        </div>
+      </div>
+      <div class="contact-info__card">
+        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+        <div>
+          <strong>Endereço</strong>
+          <span>{{ site.address }}</span>
+        </div>
+      </div>
+      <div class="contact-info__card">
+        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+        <div>
+          <strong>Secretaria</strong>
+          <span>{{ site.office_hours }}</span>
+        </div>
+      </div>
+
+      <div class="mini-map">
+        {% if site.google_maps %}
+          <a href="{{ site.google_maps }}" target="_blank" rel="noopener noreferrer">
+            <img src="{{ url_for('static', filename='images/hero/location.svg') }}" alt="Mapa com a localização da Igreja Caminhar" loading="lazy">
+            <span class="mini-map__overlay"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Ver no Google Maps</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="contact-form-wrap" id="form" data-reveal="fade-up">
+      <div class="section-head section-head--left">
+        <span class="eyebrow">Envie uma mensagem</span>
+        <h2 class="section-title">Como podemos ajudar?</h2>
+      </div>
+
+      <form method="post" action="{{ url_for('main.contato') }}" class="form" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+        <div class="form__row">
+          <div class="form__field">
+            <label for="name">Nome <span class="form__req">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Seu nome completo"
+                   value="{{ form_data.get('name', '') }}"
+                   class="{{ 'form__input--error' if errors.get('name') else '' }}"
+                   {% if not errors.get('name') and not form_data %}autofocus{% endif %}>
+            {% if errors.get('name') %}<small class="form__error">{{ errors.name }}</small>{% endif %}
+          </div>
+
+          <div class="form__field">
+            <label for="phone">Telefone / WhatsApp <span class="form__req">*</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="(31) 99999-9999"
+                   value="{{ form_data.get('phone', '') }}"
+                   class="{{ 'form__input--error' if errors.get('phone') else '' }}">
+            {% if errors.get('phone') %}<small class="form__error">{{ errors.phone }}</small>{% endif %}
+          </div>
+        </div>
+
+        <div class="form__field">
+          <label for="email">E-mail <span class="form__req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="voce@email.com"
+                 value="{{ form_data.get('email', '') }}"
+                 class="{{ 'form__input--error' if errors.get('email') else '' }}">
+          {% if errors.get('email') %}<small class="form__error">{{ errors.email }}</small>{% endif %}
+        </div>
+
+        <div class="form__field">
+          <label for="message">Mensagem <span class="form__req">*</span></label>
+          <textarea id="message" name="message" rows="6"
+                    placeholder="Escreva sua mensagem, pedido de oração ou dúvida..."
+                    class="{{ 'form__input--error' if errors.get('message') else '' }}">{{ form_data.get('message', '') }}</textarea>
+          {% if errors.get('message') %}<small class="form__error">{{ errors.message }}</small>{% endif %}
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--block">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          Enviar mensagem
+        </button>
+
+        <p class="form__note">
+          <i class="fa-solid fa-lock" aria-hidden="true"></i>
+          Seus dados são usados apenas para responder o seu contato.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tinted">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Dúvidas frequentes',
+        'Como podemos ajudar',
+        'Respostas rápidas para o que todos perguntam.'
+    ) }}
+
+    <div class="faq-list" data-reveal="fade-up">
+      {% for item in site.faq %}
+        <details class="faq-item">
+          <summary>
+            <span>{{ item.question }}</span>
+            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+          </summary>
+          <p>{{ item.answer }}</p>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

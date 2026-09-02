@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <a href="{{ url_for('main.index') }}">Início</a>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      <span>Cultos</span>
+    </nav>
+    <span class="eyebrow eyebrow--hero">Cultos e horários</span>
+    <h1 class="page-hero__title">Encontros para toda a <span class="text-gradient">sua semana</span></h1>
+    <p class="page-hero__text">
+      Nossa agenda é pensada para que cada fase da vida encontre um tempo
+      de adoração, ensino e comunhão.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="services-grid services-grid--all">
+      {% for service in site.services %}
+        {% set card_delay = loop.index0 * 80 %}
+        {% include "components/service_card.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--tinted">
+  <div class="container cultos-split">
+    <div class="cultos-split__info" data-reveal="fade-up">
+      <div class="section-head section-head--left">
+        <span class="eyebrow">Como funciona</span>
+        <h2 class="section-title">Planeje sua visita</h2>
+      </div>
+      <ul class="visit-list">
+        <li>
+          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+          <div><strong>Chegou com crianças?</strong><p>Leve-as com tranquilidade: a Geração Kids as recebe com segurança e alegria durante os cultos.</p></div>
+        </li>
+        <li>
+          <i class="fa-solid fa-music" aria-hidden="true"></i>
+          <div><strong>Não conhece ninguém?</strong><p>Vá ao balcão de acolhimento na entrada: nossa equipe fará questão de lhe apresentar a igreja.</p></div>
+        </li>
+        <li>
+          <i class="fa-solid fa-bus" aria-hidden="true"></i>
+          <div><strong>Precisa de carona?</strong><p>Chame no WhatsApp e avisamos se há uma caravana saindo próxima de você.</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="cultos-split__card" data-reveal="fade-up">
+      <div class="location-card">
+        <img src="{{ url_for('static', filename='images/fotos-da-igreja/culto-palco.jpg') }}" alt="Localização da Igreja Caminhar" loading="lazy">
+        <h3>Onde nos encontrar</h3>
+        <p><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ site.address }}</p>
+        {% if site.google_maps %}
+          <a href="{{ site.google_maps }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+            Traçar rota no mapa <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-inline" data-reveal="fade-up">
+      <div>
+        <h2 class="cta-inline__title">Tenha dúvidas sobre um culto?</h2>
+        <p>Nossa equipe responde rapidinho pelo WhatsApp.</p>
+      </div>
+      <div class="cta-inline__actions">
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Perguntar agora
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

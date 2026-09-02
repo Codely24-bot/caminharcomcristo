@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img" aria-label="">
+  <defs>
+    <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d0d10"/>
+      <stop offset="1" stop-color="#1e1e24"/>
+    </linearGradient>
+    <linearGradient id="ftable" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#27272d"/>
+      <stop offset="1" stop-color="#121216"/>
+    </linearGradient>
+    <linearGradient id="fsun" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#a6a7ad"/>
+    </linearGradient>
+    <linearGradient id="fcup" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e8e9ec"/>
+      <stop offset="1" stop-color="#9c9da4"/>
+    </linearGradient>
+    <radialGradient id="fhalo" cx="0.5" cy="0.25" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#fsky)"/>
+  <rect width="800" height="450" fill="url(#fhalo)"/>
+
+  <circle cx="400" cy="120" r="70" fill="url(#fsun)"/>
+
+  <g fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round">
+    <path d="M60 320 q 170 -80 340 0 q 170 80 340 0" stroke-opacity="0.75"/>
+  </g>
+  <g fill="#ffffff">
+    <circle cx="180" cy="288" r="8"/><circle cx="280" cy="268" r="8"/>
+    <circle cx="400" cy="262" r="8"/><circle cx="520" cy="268" r="8"/>
+    <circle cx="620" cy="288" r="8"/>
+    <circle cx="120" cy="318" r="6"/><circle cx="230" cy="281" r="6"/>
+    <circle cx="340" cy="268" r="6"/><circle cx="460" cy="268" r="6"/>
+    <circle cx="570" cy="281" r="6"/><circle cx="680" cy="318" r="6"/>
+  </g>
+
+  <rect x="180" y="330" width="440" height="18" rx="9" fill="url(#ftable)"/>
+  <rect x="250" y="348" width="14" height="102" fill="#121216"/>
+  <rect x="536" y="348" width="14" height="102" fill="#121216"/>
+
+  <g>
+    <path d="M280 250 l8 74 h52 l8 -74 z" fill="url(#fcup)"/>
+    <path d="M296 254 q2 36 -4 70" stroke="#0a0a0c" stroke-width="5" fill="none" stroke-opacity="0.6" stroke-linecap="round"/>
+    <path d="M340 250 l7 66 h40 l7 -66 z" fill="url(#fcup)" transform="translate(0 -4)"/>
+    <path d="M420 250 l8 80 h48 l8 -80 z" fill="url(#fcup)"/>
+    <path d="M438 254 q2 40 -3 76" stroke="#0a0a0c" stroke-width="5" fill="none" stroke-opacity="0.6" stroke-linecap="round"/>
+  </g>
+
+  <ellipse cx="320" cy="336" rx="34" ry="9" fill="#6f7077"/>
+  <ellipse cx="470" cy="336" rx="34" ry="9" fill="#6f7077"/>
+
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.4" stroke-width="3" stroke-linecap="round">
+    <path d="M330 200 q 12 -14 0 -28"/>
+    <path d="M470 204 q 12 -14 0 -28"/>
+  </g>
+
+  <path d="M78 120 q-24 0 -24 22 q0 14 12 20 l-6 16 18 -11 q6 2 12 2 q24 0 24 -27 q0 -22 -36 -22 z" fill="#27272d"/>
+  <text x="70" y="152" font-family="Inter, Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="700">que dia</text>
+  <text x="78" y="176" font-family="Inter, Arial, sans-serif" font-size="15" fill="#c8c9cf">gostoso!</text>
+</svg>

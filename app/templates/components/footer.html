@@ -1,0 +1,68 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col footer-col--brand">
+        <a href="{{ url_for('main.index') }}" class="footer-brand">
+          <img src="{{ url_for('static', filename='images/logo-caminhar-white.png') }}" alt="Logotipo {{ site.church_name }} (tema escuro)" width="52" height="52" loading="lazy" class="footer-logo footer-logo--dark">
+          <img src="{{ url_for('static', filename='images/logo-caminhar.png') }}" alt="Logotipo {{ site.church_name }} (tema claro)" width="52" height="52" loading="lazy" class="footer-logo footer-logo--light">
+          <strong>{{ site.church_name }}</strong>
+        </a>
+        <p>{{ site.tagline }}</p>
+        <div class="footer-social">
+          {% for name, url in site.social.items() if url %}
+            <a href="{{ url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ site.church_name }} no {{ name|capitalize }}">
+              <i class="fa-brands fa-{{ 'instagram' if name == 'instagram' else name }}" aria-hidden="true"></i>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-label="Links do site">
+        <h3 class="footer-title">Navegação</h3>
+        <ul class="footer-links">
+          <li><a href="{{ url_for('main.index') }}">Início</a></li>
+          <li><a href="{{ url_for('main.sobre') }}">Sobre nós</a></li>
+          <li><a href="{{ url_for('main.ministerios') }}">Ministérios</a></li>
+          <li><a href="{{ url_for('main.cultos') }}">Cultos</a></li>
+          <li><a href="{{ url_for('main.eventos') }}">Eventos</a></li>
+          <li><a href="{{ url_for('main.mensagens') }}">Mensagens</a></li>
+          <li><a href="{{ url_for('main.contato') }}">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Cultos</h3>
+        <ul class="footer-services">
+          {% for service in site.services %}
+            <li>
+              <span class="footer-service-day">{{ service.day }}s</span>
+              <strong>{{ service.name }}</strong>
+              <span class="footer-service-time">{{ service.time }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-title">Onde estamos</h3>
+        <address class="footer-address">
+          <p><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ site.address }}</p>
+          <p><i class="fa-solid fa-clock" aria-hidden="true"></i> {{ site.office_hours }}</p>
+          <p><i class="fa-solid fa-phone" aria-hidden="true"></i> <a href="tel:{{ site.phone }}">{{ site.phone }}</a></p>
+          <p><i class="fa-regular fa-envelope" aria-hidden="true"></i> <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        </address>
+        {% if site.google_maps %}
+          <a href="{{ site.google_maps }}" target="_blank" rel="noopener noreferrer" class="footer-map">
+            <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+            Ver no mapa
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> {{ site.church_name }}. Todos os direitos reservados.</p>
+      <p>Feito com <i class="fa-solid fa-heart" aria-hidden="true"></i> para a glória de Deus.</p>
+    </div>
+  </div>
+</footer>

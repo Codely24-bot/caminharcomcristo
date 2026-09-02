@@ -1,0 +1,7 @@
+{% macro section_heading(eyebrow, title, text, align='center') %}
+<div class="section-head section-head--{{ align }}" data-reveal="fade-up">
+  {% if eyebrow %}<span class="eyebrow">{{ eyebrow }}</span>{% endif %}
+  <h2 class="section-title">{{ title }}</h2>
+  {% if text %}<p class="section-text">{{ text }}</p>{% endif %}
+</div>
+{% endmacro %}

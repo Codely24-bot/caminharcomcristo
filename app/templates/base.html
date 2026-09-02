@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script>
+    (function () {
+      var theme = null;
+      try { theme = localStorage.getItem("caminhar-theme"); } catch (e) {}
+      if (theme !== "light" && theme !== "dark") {
+        try {
+          theme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) ? "light" : "dark";
+        } catch (e) {
+          theme = "dark";
+        }
+      }
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+
+  {% set route = request.path.strip('/') or 'index' %}
+  {% set info = page_info.get(route, {}) %}
+  {% set page_title = info.get('title') or site.seo.default_title %}
+  {% set page_description = info.get('description') or site.seo.default_description %}
+  {% set canonical = site.seo.site_url + request.path if request.path != '/' else site.seo.site_url + '/' %}
+  {% set og_image = site.seo.site_url + site.seo.og_image %}
+
+  <title>{% block title %}{{ page_title }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ page_description }}{% endblock %}">
+  <meta name="keywords" content="{{ site.seo.keywords }}">
+  <meta name="author" content="{{ site.church_name }}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ canonical }}">
+
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="{{ site.church_name }}">
+  <meta property="og:type" content="{{ site.seo.og_type }}">
+  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:description" content="{{ page_description }}">
+  <meta property="og:url" content="{{ canonical }}">
+  <meta property="og:image" content="{{ og_image }}">
+  <meta property="og:locale" content="{{ site.seo.locale }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title }}">
+  <meta name="twitter:description" content="{{ page_description }}">
+  <meta name="twitter:image" content="{{ og_image }}">
+
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/logo-caminhar.png') }}">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons: Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+
+  {% block head_extra %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+  {% include "components/header.html" %}
+
+  <main id="content">
+    {# --- Mensagens flash (ex.: contato enviado) --- #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrap" aria-live="polite">
+          {% for category, message in messages %}
+            <div class="flash flash--{{ category }}">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>{{ message }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "components/footer.html" %}
+  {% include "components/whatsapp.html" %}
+
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>
