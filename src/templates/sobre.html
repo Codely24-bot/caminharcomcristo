@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <a href="{{ url('main.index') }}">Início</a>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      <span>Quem somos</span>
+    </nav>
+    <span class="eyebrow eyebrow--hero">Quem somos</span>
+    <h1 class="page-hero__title">Sobre a <span class="text-gradient">Igreja Caminhar</span></h1>
+    <p class="page-hero__text">{{ site.tagline }}</p>
+  </div>
+</section>
+
+<section class="section about-detail">
+  <div class="container about-detail__grid">
+    <div class="about-detail__body">
+      <div class="section-head section-head--left" data-reveal="fade-up">
+        <span class="eyebrow">Nossa história</span>
+        <h2 class="section-title">Muitas mãos para <span class="text-gradient">tocar muitos corações</span></h2>
+      </div>
+      <div class="prose" data-reveal="fade-up">
+        <p>
+          A {{ site.church_name }} nasceu em {{ site.founded }} do coração de algumas
+          famílias que sonhavam com uma igreja diferente: simples na forma, profunda
+          na essência. Um lugar em que cada pessoa, ao chegar, fosse recebida pelo nome
+          e encontrasse um caminho para crescer com Deus e com irmãos.
+        </p>
+        <p>
+          Ao longo dos anos fomos crescendo — não apenas em número, mas em profundidade.
+          Vimos vidas ressignificadas, casamentos restaurados, jovens encontrando propósito
+          e crianças aprendendo, desde cedo, que Deus é bom. Tudo isso sem abrir mão da
+          nossa essência: <em>amar a Deus, valorizar pessoas e caminhar juntos</em>.
+        </p>
+        <blockquote>
+          <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+          Não que nós já o tenhamos alcançado... prossigo para o alvo.
+          <cite>Filipenses 3.13-14</cite>
+        </blockquote>
+      </div>
+    </div>
+    <div class="about-detail__media" data-reveal="fade-up">
+      <img src="{{ static('images/fotos-da-igreja/familia-igreja.jpg') }}" alt="Pessoas caminhando juntas na Igreja Caminhar" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="section section--tinted">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Nossos valores',
+        'A base de tudo o que fazemos',
+        'Quatro princípios que orientam cada decisão da nossa igreja.'
+    ) }}
+
+    <div class="value-cards">
+      <article class="value-card" data-reveal="fade-up">
+        <span class="value-card__num">01</span>
+        <i class="fa-solid fa-heart" aria-hidden="true"></i>
+        <h3>Amor a Deus</h3>
+        <p>Adoramos e amamos a Deus acima de tudo, com inteireza de coração.</p>
+      </article>
+      <article class="value-card" data-reveal="fade-up" data-delay="100">
+        <span class="value-card__num">02</span>
+        <i class="fa-solid fa-people-roof" aria-hidden="true"></i>
+        <h3>Família primeiro</h3>
+        <p>Acreditamos que a igreja começa dentro de casa e fortalece cada lar.</p>
+      </article>
+      <article class="value-card" data-reveal="fade-up" data-delay="200">
+        <span class="value-card__num">03</span>
+        <i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i>
+        <h3>Serviço</h3>
+        <p>Somos mãos e pés de Jesus, servindo pessoas com generosidade.</p>
+      </article>
+      <article class="value-card" data-reveal="fade-up" data-delay="300">
+        <span class="value-card__num">04</span>
+        <i class="fa-solid fa-route" aria-hidden="true"></i>
+        <h3>Comunhão</h3>
+        <p>Ninguém caminha sozinho — caminhamos juntos, uns pelos outros.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-inline" data-reveal="fade-up">
+      <div>
+        <h2 class="cta-inline__title">Venha caminhar conosco</h2>
+        <p>Nossa porta está aberta. Sua família será bem recebida aqui.</p>
+      </div>
+      <div class="cta-inline__actions">
+        <a href="{{ url('main.cultos') }}" class="btn btn--primary">Ver horários de culto</a>
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

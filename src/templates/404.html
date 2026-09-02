@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Página não encontrada | {{ site.church_name }}{% endblock %}
+
+{% block meta_description %}A página que você procurou não existe. Volte para o início e continue caminhando conosco.{% endblock %}
+
+{% block content %}
+<section class="notfound">
+  <div class="container notfound__inner" data-reveal="fade-up">
+    <div class="notfound__code">404</div>
+    <span class="eyebrow">Opa!</span>
+    <h1 class="notfound__title">Parece que você se perdeu no caminho</h1>
+    <p class="notfound__text">
+      A página que você procura não existe ou foi movida.
+      Mas não se preocupe — sempre há um caminho de volta para casa.
+    </p>
+    <div class="notfound__actions">
+      <a href="{{ url('main.index') }}" class="btn btn--primary">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+        Voltar para o início
+      </a>
+      <a href="{{ url('main.contato') }}#form" class="btn btn--ghost">Fale conosco</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

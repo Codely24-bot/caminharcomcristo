@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- ============================= HERO ============================= -->
+<section class="hero">
+  <div class="hero__media" aria-hidden="true">
+    <img src="{{ static('images/fotos-da-igreja/hero-congregation.jpg') }}" alt="" fetchpriority="high" class="hero__photo">
+    <div class="hero__glow hero__glow--one"></div>
+    <div class="hero__glow hero__glow--two"></div>
+    <div class="hero__overlay"></div>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <span class="eyebrow eyebrow--hero" data-reveal="fade-up">
+        <i class="fa-solid fa-route" aria-hidden="true"></i>
+        {{ site.tagline }}
+      </span>
+      <h1 class="hero__title" data-reveal="fade-up">
+        Um lar para <span class="text-gradient">a sua família</span><br>
+        caminhar com Deus
+      </h1>
+      <p class="hero__text" data-reveal="fade-up">
+        Amamos a Deus, valorizamos pessoas e caminhamos juntos para
+        transformar vidas. Venha fazer parte dessa jornada.
+      </p>
+      <div class="hero__actions" data-reveal="fade-up">
+        <a href="{{ url('main.contato') }}#form" class="btn btn--primary">
+          Quero visitar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        <a href="{{ url('main.cultos') }}" class="btn btn--ghost">
+          <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+          Ver horários de culto
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__next-service" data-reveal="fade-up">
+      <div class="next-service__head">
+        <i class="fa-solid fa-church" aria-hidden="true"></i>
+        <span>Próximo encontro</span>
+      </div>
+      <strong>{{ site.services[0].name }}</strong>
+      <div class="next-service__time">
+        <i class="fa-regular fa-calendar-check" aria-hidden="true"></i>
+        {{ site.services[0].day }} · {{ site.services[0].time }}
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span>Role para descobrir</span>
+    <i class="fa-solid fa-chevron-down"></i>
+  </div>
+</section>
+
+<!-- ============================= STATS ============================= -->
+<section class="stats" aria-label="A Igreja Caminhar em números">
+  <div class="container stats__inner">
+    {% for stat in site.stats %}
+      <div class="stat" data-reveal="fade-up" data-delay="{{ loop.index0 * 90 }}">
+        <i class="{{ stat.icon }}" aria-hidden="true"></i>
+        <strong>{{ stat.value }}</strong>
+        <span>{{ stat.label }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ============================= SOBRE / PORQUE ============================= -->
+<section class="section about-section">
+  <div class="container about-section__grid">
+    <div class="about-section__media" data-reveal="fade-up">
+      <div class="about-card">
+        <img src="{{ static('images/fotos-da-igreja/sobre-grupo.jpg') }}" alt="Famílias reunidas na Igreja Caminhar" loading="lazy">
+        <div class="about-card__badge">
+          <i class="fa-solid fa-hands-praying" aria-hidden="true"></i>
+          <span>Desde {{ site.founded }} caminhando<br>pelo propósito de Deus</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-section__body">
+      <div class="section-head section-head--left" data-reveal="fade-up">
+        <span class="eyebrow">Quem somos</span>
+        <h2 class="section-title">Uma igreja onde você é mais que visita: é família</h2>
+      </div>
+      <p data-reveal="fade-up">
+        Na {{ site.church_name }} acreditamos que ninguém precisa caminhar sozinho.
+        Desde {{ site.founded }}, temos visto Deus transformar histórias em Belo Horizonte
+        através de relacionamentos sinceros, adoração verdadeira e uma Palavra viva.
+      </p>
+      <ul class="value-list" data-reveal="fade-up">
+        <li><i class="fa-solid fa-heart" aria-hidden="true"></i> Amor a Deus em primeiro lugar</li>
+        <li><i class="fa-solid fa-people-group" aria-hidden="true"></i> Pessoas valorizadas acima de estruturas</li>
+        <li><i class="fa-solid fa-route" aria-hidden="true"></i> Caminhar juntos — ninguém fica para trás</li>
+        <li><i class="fa-solid fa-hand-holding-heart" aria-hidden="true"></i> Impacto real na cidade e nas famílias</li>
+      </ul>
+      <div data-reveal="fade-up">
+        <a href="{{ url('main.sobre') }}" class="btn btn--primary">
+          Conheça nossa história <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CULTOS ============================= -->
+<section class="section section--tinted services-section" id="cultos">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Agenda semanal',
+        'Momentos para encontrar Deus e edificar a sua vida',
+        'Escolha um encontro e venha como estiver. Aqui, todos são bem-vindos.'
+    ) }}
+
+    <div class="services-grid">
+      {% for service in site.services %}
+        {% set card_delay = loop.index0 * 80 %}
+        {% include "components/service_card.html" %}
+      {% endfor %}
+    </div>
+
+    <div class="section-cta" data-reveal="fade-up">
+      <a href="{{ url('main.cultos') }}" class="btn btn--ghost">
+        Ver todos os detalhes <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= MINISTÉRIOS ============================= -->
+<section class="section ministries-section">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Ministérios',
+        'Um lugar de serviço para cada chamado',
+        'Há um espaço para você usar seus dons e abençoar outras vidas.'
+    ) }}
+
+    <div class="ministries-grid">
+      {% for ministry in site.ministries | limit(3) %}
+        {% set card_delay = loop.index0 * 80 %}
+        {% include "components/ministry_card.html" %}
+      {% endfor %}
+    </div>
+
+    <div class="section-cta" data-reveal="fade-up">
+      <a href="{{ url('main.ministerios') }}" class="btn btn--ghost">
+        Conhecer todos os ministérios <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= EVENTOS ============================= -->
+<section class="section section--tinted events-section">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Agenda',
+        'Próximos eventos',
+        'Não perca os encontros especiais que preparamos para a nossa família.'
+    ) }}
+
+    <div class="events-grid">
+      {% for event in site.events %}
+        {% set card_delay = loop.index0 * 100 %}
+        {% include "components/event_card.html" %}
+      {% endfor %}
+    </div>
+
+    <div class="section-cta" data-reveal="fade-up">
+      <a href="{{ url('main.eventos') }}" class="btn btn--ghost">
+        Ver agenda completa <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CTA FINAL ============================= -->
+<section class="cta-banner">
+  <div class="container cta-banner__inner">
+    <div data-reveal="fade-up">
+      <span class="eyebrow eyebrow--hero">Faça parte</span>
+      <h2 class="cta-banner__title">A sua história pode começar aqui</h2>
+      <p class="cta-banner__text">
+        Chame no WhatsApp, tire dúvidas e vamos caminhar juntos.
+        A porta está aberta para você e sua família.
+      </p>
+      <div class="cta-banner__actions">
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          Chamar no WhatsApp
+        </a>
+        <a href="{{ url('main.contato') }}#form" class="btn btn--ghost">
+          Enviar mensagem
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+<header class="site-header" id="site-header">
+  {% set route = currentPath %}
+
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <div class="top-bar__info">
+        <a href="{{ whatsapp_url }}" aria-label="WhatsApp {{ site.church_name }}">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          <span>{{ site.phone }}</span>
+        </a>
+        <a href="mailto:{{ site.email }}">
+          <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+          <span>{{ site.email }}</span>
+        </a>
+      </div>
+      <div class="top-bar__services">
+        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+        <span>{{ site.services[0].day }} · {{ site.services[0].time }}</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar" aria-label="Navegação principal">
+    <div class="container navbar__inner">
+      <a href="{{ url('main.index') }}" class="brand" aria-label="{{ site.church_name }} — Página inicial">
+        <img src="{{ static('images/logo-caminhar-white.png') }}" alt="Logotipo {{ site.church_name }} (tema escuro)" width="44" height="44" class="brand__logo brand__logo--dark">
+        <img src="{{ static('images/logo-caminhar.png') }}" alt="Logotipo {{ site.church_name }} (tema claro)" width="44" height="44" class="brand__logo brand__logo--light">
+        <span class="brand__text">
+          <strong>{{ site.church_name }}</strong>
+          <small>Andando juntos com propósito</small>
+        </span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        {% set items = [
+          { 'endpoint': 'main.index', 'label': 'Início', 'slug': 'index' },
+          { 'endpoint': 'main.sobre', 'label': 'Sobre', 'slug': 'sobre' },
+          { 'endpoint': 'main.ministerios', 'label': 'Ministérios', 'slug': 'ministerios' },
+          { 'endpoint': 'main.cultos', 'label': 'Cultos', 'slug': 'cultos' },
+          { 'endpoint': 'main.eventos', 'label': 'Eventos', 'slug': 'eventos' },
+          { 'endpoint': 'main.mensagens', 'label': 'Mensagens', 'slug': 'mensagens' }
+        ] %}
+        {% for item in items %}
+          <li>
+            <a href="{{ url(item.endpoint) }}" class="nav-link {{ 'nav-link--active' if route == item.slug else '' }}">
+              {{ item.label }}
+            </a>
+          </li>
+        {% endfor %}
+        <li>
+          <a href="{{ url('main.contato') }}" class="nav-cta">
+            Fale conosco
+          </a>
+        </li>
+      </ul>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema" aria-pressed="false">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"></path>
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+    </div>
+  </nav>
+</header>
