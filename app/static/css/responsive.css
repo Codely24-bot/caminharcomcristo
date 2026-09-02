@@ -239,12 +239,6 @@
     flex: 1 1 100%;
   }
 
-  .hero__app-logo {
-    width: 92px;
-    height: 92px;
-    border-radius: 23px;
-  }
-
   .stats__inner {
     grid-template-columns: repeat(2, 1fr);
   }
