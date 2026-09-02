@@ -36,6 +36,25 @@ app.use(
 );
 
 // ----------------------------------------------------------------------
+// Manifest e Service Worker na raiz (escopo do PWA)
+// ----------------------------------------------------------------------
+app.get("/manifest.webmanifest", (req, res) => {
+  res
+    .status(200)
+    .type("application/manifest+json")
+    .set("Cache-Control", "public, max-age=3600")
+    .sendFile(path.join(__dirname, "app", "static", "manifest.webmanifest"));
+});
+
+app.get("/sw.js", (req, res) => {
+  res
+    .status(200)
+    .type("application/javascript")
+    .set("Cache-Control", "no-cache")
+    .sendFile(path.join(__dirname, "app", "static", "sw.js"));
+});
+
+// ----------------------------------------------------------------------
 // Nunjucks (clone do Jinja2 para Node)
 // ----------------------------------------------------------------------
 const viewsDir = path.join(__dirname, "src", "templates");

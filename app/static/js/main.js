@@ -241,4 +241,39 @@
       });
     }, 6000);
   }
+
+  /* ---------- Splash de abertura (estilo app) ---------- */
+  var splash = doc.getElementById("app-splash");
+  if (splash) {
+    var splashStart = Date.now();
+    var reduceMotion = false;
+    try {
+      reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (e) {}
+
+    var hideSplash = function () {
+      if (reduceMotion) {
+        splash.remove();
+        return;
+      }
+      var elapsed = Date.now() - splashStart;
+      setTimeout(function () {
+        splash.classList.add("is-hidden");
+        setTimeout(function () {
+          if (splash.parentNode) splash.parentNode.removeChild(splash);
+        }, 450);
+      }, Math.max(0, 650 - elapsed));
+    };
+
+    if (doc.readyState === "complete") hideSplash();
+    else window.addEventListener("load", hideSplash);
+    setTimeout(hideSplash, 2600);
+  }
+
+  /* ---------- Service Worker (PWA instalável) ---------- */
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").catch(function () {});
+    });
+  }
 })();

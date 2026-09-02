@@ -786,6 +786,23 @@ h1, h2, h3, h4 {
   gap: clamp(2rem, 6vw, 4.5rem);
 }
 
+.hero__app-logo {
+  width: 104px;
+  height: 104px;
+  border-radius: 26px;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.7rem;
+}
+
+.hero__app-logo img {
+  width: 62%;
+  height: auto;
+  display: block;
+}
+
 .hero__title {
   font-size: clamp(2.1rem, 2.6vw + 1.3rem, 4.2rem);
   font-weight: 800;
@@ -2342,4 +2359,69 @@ h1, h2, h3, h4 {
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.9rem;
+}
+
+/* ---------------------------------------------------------------
+   SPLASH DE ABERTURA (estilo app)
+   --------------------------------------------------------------- */
+.app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(120% 120% at 50% 28%, #ffffff 0%, #ececf0 100%);
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.app-splash.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.app-splash__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.app-splash__logo {
+  width: 120px;
+  height: 120px;
+  margin-bottom: 0.6rem;
+  animation: splash-pop 0.6s var(--ease);
+}
+
+.app-splash__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.app-splash__tagline {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@keyframes splash-pop {
+  0% {
+    transform: scale(0.82) translateY(10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-splash__logo {
+    animation: none;
+  }
 }
