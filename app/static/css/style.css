@@ -167,7 +167,7 @@ body {
   line-height: 1.65;
   color: var(--text);
   background-color: var(--bg);
-  padding-top: 132px;
+  padding-top: 88px;
   background-image:
     radial-gradient(1200px 700px at 80% -10%, var(--glow-1), transparent 60%),
     radial-gradient(900px 600px at -10% 30%, var(--glow-2), transparent 55%);
@@ -702,7 +702,7 @@ h1, h2, h3, h4 {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: calc(100svh - var(--header-h) - 44px);
+  min-height: calc(100svh - var(--header-h));
   padding-block: clamp(3.5rem, 8vh, 6rem) clamp(4rem, 9vh, 6rem);
   isolation: isolate;
   overflow: hidden;
@@ -2073,7 +2073,7 @@ h1, h2, h3, h4 {
    ============================================================ */
 .flash-wrap {
   position: fixed;
-  top: calc(var(--header-h) + 44px + 1rem);
+  top: calc(var(--header-h) + 1rem);
   right: 1.2rem;
   z-index: 80;
   display: grid;

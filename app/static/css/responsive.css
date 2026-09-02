@@ -146,7 +146,7 @@
 
   .nav-links {
     position: fixed;
-    top: var(--header-total, 132px);
+    top: var(--header-total, 88px);
     right: 0;
     bottom: 0;
     width: min(80vw, 360px);
@@ -233,10 +233,6 @@
 
   .top-bar {
     height: 40px;
-  }
-
-  body {
-    padding-top: 128px;
   }
 
   .hero__actions .btn {

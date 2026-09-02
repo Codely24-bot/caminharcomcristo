@@ -1,21 +1,6 @@
 <header class="site-header" id="site-header">
   {% set route = currentPath %}
 
-  <div class="top-bar">
-    <div class="container top-bar__inner">
-      <div class="top-bar__info">
-        <a href="mailto:{{ site.email }}">
-          <i class="fa-regular fa-envelope" aria-hidden="true"></i>
-          <span>{{ site.email }}</span>
-        </a>
-      </div>
-      <div class="top-bar__services">
-        <i class="fa-regular fa-clock" aria-hidden="true"></i>
-        <span>{{ site.services[0].day }} · {{ site.services[0].time }}</span>
-      </div>
-    </div>
-  </div>
-
   <nav class="navbar" aria-label="Navegação principal">
     <div class="container navbar__inner">
       <a href="{{ url('main.index') }}" class="brand" aria-label="{{ site.church_name }} — Página inicial">
