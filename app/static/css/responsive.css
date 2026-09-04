@@ -31,6 +31,15 @@
     width: 112px;
     height: 112px;
   }
+
+  .past-event {
+    grid-template-columns: minmax(190px, 0.9fr) minmax(0, 1.1fr);
+    min-height: 220px;
+  }
+
+  .past-event img {
+    height: 100%;
+  }
 }
 
 /* ===================== >= 640px ===================== */
@@ -111,6 +120,10 @@
 
   .value-cards {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .past-events {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

@@ -1234,6 +1234,56 @@ h1, h2, h3, h4 {
   margin-right: 0.3rem;
 }
 
+/* ----- Past event (eventos) ----- */
+.past-events {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.2rem, 2.6vw, 1.8rem);
+  margin-top: clamp(2.4rem, 5vw, 3.5rem);
+}
+
+.past-event {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.past-event:hover {
+  transform: translateY(-6px);
+  border-color: rgba(233, 234, 236, 0.35);
+}
+
+.past-event img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.past-event__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.past-event__body h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.past-event__body p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
 /* ============================================================
    CTA BANNER
    ============================================================ */
