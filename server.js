@@ -13,6 +13,7 @@ const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const DEBUG = String(process.env.DEBUG || "false").toLowerCase() === "true";
 const PROD = process.env.NODE_ENV === "production";
+const STATIC_MAXAGE = PROD ? "7d" : 0;
 
 app.disable("x-powered-by");
 app.set("trust proxy", 1);
@@ -31,7 +32,7 @@ app.use(
   "/static",
   express.static(path.join(__dirname, "app", "static"), {
     index: false,
-    maxAge: "7d",
+    maxAge: STATIC_MAXAGE,
   })
 );
 

@@ -223,7 +223,8 @@
     visibility: visible;
   }
 
-  html.menu-open {
+  html.menu-open,
+  body.menu-open {
     overflow: hidden;
   }
 }

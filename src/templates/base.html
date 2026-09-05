@@ -66,8 +66,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="{{ static('css/style.css') }}">
-  <link rel="stylesheet" href="{{ static('css/responsive.css') }}">
+  <link rel="stylesheet" href="{{ static('css/style.css') }}?v=4">
+  <link rel="stylesheet" href="{{ static('css/responsive.css') }}?v=4">
 
   {% block head_extra %}{% endblock %}
 </head>
@@ -97,6 +97,6 @@
   {% include "components/footer.html" %}
   {% include "components/whatsapp.html" %}
 
-  <script src="{{ static('js/main.js') }}" defer></script>
+  <script src="{{ static('js/main.js') }}?v=4" defer></script>
 </body>
 </html>

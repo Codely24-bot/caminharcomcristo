@@ -5,12 +5,12 @@
    ============================================================ */
 "use strict";
 
-const CACHE_PREFIX = "igrejacaminhar-v1";
+const CACHE_PREFIX = "igrejacaminhar-v2";
 const PRECACHE_URLS = [
   "/",
-  "/static/css/style.css",
-  "/static/css/responsive.css",
-  "/static/js/main.js",
+  "/static/css/style.css?v=4",
+  "/static/css/responsive.css?v=4",
+  "/static/js/main.js?v=4",
   "/static/images/pwa/icon-192.png",
   "/static/images/pwa/icon-512.png",
   "/static/images/pwa/icon-maskable-512.png",
