@@ -8,9 +8,9 @@
 const CACHE_PREFIX = "igrejacaminhar-v3";
 const PRECACHE_URLS = [
   "/",
-  "/static/css/style.css?v=7",
-  "/static/css/responsive.css?v=7",
-  "/static/js/main.js?v=7",
+  "/static/css/style.css?v=9",
+  "/static/css/responsive.css?v=9",
+  "/static/js/main.js?v=9",
   "/static/images/pwa/icon-192.png",
   "/static/images/pwa/icon-512.png",
   "/static/images/pwa/icon-maskable-512.png",

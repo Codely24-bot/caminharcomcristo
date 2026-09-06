@@ -287,7 +287,6 @@
     var statusEl = doc.getElementById("notify-status");
     var activateBtn = doc.getElementById("notify-activate");
     var disableBtn = doc.getElementById("notify-disable");
-    var testBtn = doc.getElementById("notify-test");
     var servicesCheck = doc.getElementById("notify-services");
     var eventsCheck = doc.getElementById("notify-events");
     var upcomingEl = doc.getElementById("notify-upcoming");
@@ -297,6 +296,16 @@
     var swReg = null;
     var isSubscribed = false;
     var promptEvent = null;
+    var isInstalled = false;
+    try {
+      isInstalled = localStorage.getItem("caminhar-app-installed") === "1";
+    } catch (e) {}
+    if (!isInstalled) {
+      try {
+        isInstalled =
+          window.matchMedia && window.matchMedia("(display-mode: standalone)").matches;
+      } catch (e2) {}
+    }
 
     function setStatus(text, ok) {
       if (!statusEl) return;
@@ -447,7 +456,19 @@
               isSubscribed = true;
               persistState();
               refreshButtons();
-              setStatus("Pronto! Você receberá lembretes dos cultos e eventos.", true);
+              setStatus(
+                isInstalled
+                  ? "Notificações ativadas! Enviando um teste agora para você..."
+                  : "Pronto! Você receberá lembretes dos cultos e eventos.",
+                true
+              );
+              // Envia um teste automático apenas para quem instalou o webapp
+              if (isInstalled) {
+                setTimeout(function () {
+                  sendTest();
+                }, 700);
+              }
+              return null;
             });
         })
         .catch(function () {
@@ -488,9 +509,6 @@
           vapidKey = cfg.public_key;
           renderUpcoming(cfg.upcoming);
         }
-        if (cfg.test_enabled && testBtn) {
-          testBtn.hidden = false;
-        }
       });
 
       // Estado já inscrito?
@@ -528,7 +546,6 @@
 
       if (activateBtn) activateBtn.addEventListener("click", subscribe);
       if (disableBtn) disableBtn.addEventListener("click", unsubscribe);
-      if (testBtn) testBtn.addEventListener("click", sendTest);
 
       // Fluxo de instalação do PWA: ao instalar, oferece as notificações
       window.addEventListener("beforeinstallprompt", function (e) {
@@ -538,6 +555,10 @@
 
       window.addEventListener("appinstalled", function () {
         if (promptEvent) promptEvent = null;
+        isInstalled = true;
+        try {
+          localStorage.setItem("caminhar-app-installed", "1");
+        } catch (e) {}
         setTimeout(function () {
           if ("Notification" in window && !isSubscribed && Notification.permission === "default") {
             showModal();
