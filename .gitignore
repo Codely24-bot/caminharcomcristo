@@ -1,6 +1,9 @@
 # Ambiente
 .env
 
+# Dados de execução
+data/notifications.json
+
 # Node.js
 node_modules/
 npm-debug.log*

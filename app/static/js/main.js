@@ -279,6 +279,247 @@
     setTimeout(hideSplash, 2600);
   }
 
+  /* ---------- Notificações push (lembretes de cultos e eventos) ---------- */
+  (function () {
+    var modal = doc.getElementById("notify-modal");
+    if (!modal) return; // componente não presente na página
+
+    var statusEl = doc.getElementById("notify-status");
+    var activateBtn = doc.getElementById("notify-activate");
+    var disableBtn = doc.getElementById("notify-disable");
+    var servicesCheck = doc.getElementById("notify-services");
+    var eventsCheck = doc.getElementById("notify-events");
+    var upcomingEl = doc.getElementById("notify-upcoming");
+    var openTriggers = doc.querySelectorAll("[data-notify-open]");
+
+    var vapidKey = null;
+    var swReg = null;
+    var isSubscribed = false;
+    var promptEvent = null;
+
+    function setStatus(text, ok) {
+      if (!statusEl) return;
+      statusEl.textContent = text || "";
+      statusEl.classList.toggle("is-ok", !!ok);
+      statusEl.classList.toggle("is-error", text && !ok);
+    }
+
+    function urlBase64ToUint8Array(base64String) {
+      var padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+      var base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+      var raw = window.atob(base64);
+      var output = new Uint8Array(raw.length);
+      for (var i = 0; i < raw.length; i++) {
+        output[i] = raw.charCodeAt(i);
+      }
+      return output;
+    }
+
+    function loadConfig() {
+      return fetch("/api/notifications/config", { cache: "no-store" })
+        .then(function (r) {
+          return r.json();
+        })
+        .catch(function () {
+          return null;
+        });
+    }
+
+    function renderUpcoming(list) {
+      if (!upcomingEl || !list || !list.length) return;
+      upcomingEl.innerHTML = "";
+      list.forEach(function (item) {
+        var li = doc.createElement("li");
+        var when = new Date(item.when);
+        var label =
+          when.toLocaleDateString("pt-BR", { weekday: "short", day: "2-digit", month: "short" }) +
+          " às " +
+          when.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+        li.textContent = item.title + " — " + label;
+        upcomingEl.appendChild(li);
+      });
+    }
+
+    function showModal() {
+      modal.hidden = false;
+      setStatus("");
+      if (!("Notification" in window)) {
+        setStatus("Seu navegador não suporta notificações.", false);
+        return;
+      }
+      if (Notification.permission === "granted") {
+        setStatus("Você já autorizou as notificações. Aperte o botão para confirmar os lembretes.", true);
+      } else if (Notification.permission === "denied") {
+        setStatus("As notificações estão bloqueadas no navegador. Libere nas configurações do site.", false);
+      }
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+    }
+
+    function getSubscriptions(reg) {
+      return reg.pushManager.getSubscription();
+    }
+
+    function persistState() {
+      try {
+        localStorage.setItem("caminhar-notif-enabled", isSubscribed ? "1" : "0");
+      } catch (e) {}
+    }
+
+    function refreshButtons() {
+      if (activateBtn) activateBtn.hidden = isSubscribed;
+      if (disableBtn) disableBtn.hidden = !isSubscribed;
+    }
+
+    function subscribe() {
+      setStatus("");
+      if (!("Notification" in window)) {
+        setStatus("Seu navegador não suporta notificações.", false);
+        return;
+      }
+      if (vapidKey) {
+        // grava a chave pública para o SW usar em caso de nova inscrição
+        try {
+          sessionStorage.setItem("caminhar-vapid", vapidKey);
+        } catch (e) {}
+      }
+      void activateNotifications();
+    }
+
+    function activateNotifications() {
+      return Notification.requestPermission()
+        .then(function (permission) {
+          if (permission !== "granted") {
+            setStatus("Permissão negada. Não será possível enviar lembretes.", false);
+            return;
+          }
+          return navigator.serviceWorker.ready
+            .then(function (reg) {
+              swReg = reg;
+              return reg.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(vapidKey),
+              });
+            })
+            .then(function (sub) {
+              var reminders = {
+                services: servicesCheck ? servicesCheck.checked : true,
+                events: eventsCheck ? eventsCheck.checked : true,
+              };
+              return fetch("/api/notifications/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  subscription: sub.toJSON(),
+                  reminders: reminders,
+                }),
+              });
+            })
+            .then(function (r) {
+              if (!r.ok) throw new Error("subscribe-failed");
+              isSubscribed = true;
+              persistState();
+              refreshButtons();
+              setStatus("Pronto! Você receberá lembretes dos cultos e eventos.", true);
+            });
+        })
+        .catch(function () {
+          setStatus("Não foi possível ativar as notificações agora. Tente novamente.", false);
+        });
+    }
+
+    function unsubscribe() {
+      return getSubscriptions(swReg)
+        .then(function (sub) {
+          if (!sub) return;
+          return fetch("/api/notifications/unsubscribe", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ endpoint: sub.endpoint }),
+          });
+        })
+        .then(function () {
+          return swReg.pushManager.getSubscription().then(function (sub) {
+            return sub ? sub.unsubscribe() : null;
+          });
+        })
+        .then(function () {
+          isSubscribed = false;
+          persistState();
+          refreshButtons();
+          setStatus("Lembretes desativados.", true);
+        })
+        .catch(function () {
+          setStatus("Não foi possível desativar os lembretes.", false);
+        });
+    }
+
+    function setup() {
+      loadConfig().then(function (cfg) {
+        if (!cfg) return; // servidor sem suporte a push
+        if (cfg.enabled) {
+          vapidKey = cfg.public_key;
+          renderUpcoming(cfg.upcoming);
+        }
+      });
+
+      // Estado já inscrito?
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.ready
+          .then(getSubscriptions)
+          .then(function (sub) {
+            isSubscribed = !!sub;
+            persistState();
+            refreshButtons();
+            return null;
+          })
+          .catch(function () {});
+      }
+
+      if (openTriggers.length) {
+        openTriggers.forEach(function (el) {
+          el.addEventListener("click", function (e) {
+            e.preventDefault();
+            showModal();
+          });
+        });
+      }
+
+      var closeBtn = doc.getElementById("notify-close");
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+      modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeModal();
+      });
+
+      doc.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !modal.hidden) closeModal();
+      });
+
+      if (activateBtn) activateBtn.addEventListener("click", subscribe);
+      if (disableBtn) disableBtn.addEventListener("click", unsubscribe);
+
+      // Fluxo de instalação do PWA: ao instalar, oferece as notificações
+      window.addEventListener("beforeinstallprompt", function (e) {
+        e.preventDefault();
+        promptEvent = e;
+      });
+
+      window.addEventListener("appinstalled", function () {
+        if (promptEvent) promptEvent = null;
+        setTimeout(function () {
+          if ("Notification" in window && !isSubscribed && Notification.permission === "default") {
+            showModal();
+          }
+        }, 1200);
+      });
+    }
+
+    setup();
+  })();
+
   /* ---------- Service Worker (PWA instalável) ---------- */
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {

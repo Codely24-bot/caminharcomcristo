@@ -8,6 +8,7 @@ const nunjucks = require("nunjucks");
 const cookieParser = require("cookie-parser");
 
 const { installRoutes, globalContext } = require("./src/routes");
+const { installNotifications } = require("./src/notifications");
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
@@ -103,6 +104,12 @@ app.use((req, res, next) => {
   Object.assign(res.locals, globalContext(req, res));
   next();
 });
+
+// ----------------------------------------------------------------------
+// Notificações push (Web Push / VAPID)
+// Registradas antes das rotas para não caírem no middleware 404.
+// ----------------------------------------------------------------------
+installNotifications(app);
 
 // ----------------------------------------------------------------------
 // Rotas

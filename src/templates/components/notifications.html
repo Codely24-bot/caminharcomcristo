@@ -1,0 +1,48 @@
+<div class="notify-modal" id="notify-modal" hidden>
+  <div class="notify-modal__card" role="dialog" aria-modal="true" aria-labelledby="notify-title">
+    <button type="button" class="notify-modal__close" id="notify-close" aria-label="Fechar">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <div class="notify-modal__icon" aria-hidden="true">
+      <i class="fa-solid fa-bell"></i>
+    </div>
+
+    <h3 class="notify-modal__title" id="notify-title">Lembretes de cultos e eventos</h3>
+    <p class="notify-modal__text">
+      Ative as notificações para receber um lembrete antes de cada culto e evento da
+      {{ site.church_name }}.
+    </p>
+
+    <div class="notify-options">
+      <label class="notify-option">
+        <input type="checkbox" id="notify-services" checked>
+        <span>
+          <strong>Cultos</strong>
+          <small>Domingos, quartas, sábados e encontros</small>
+        </span>
+      </label>
+      <label class="notify-option">
+        <input type="checkbox" id="notify-events" checked>
+        <span>
+          <strong>Eventos</strong>
+          <small>Batismos, encontros e celebrações</small>
+        </span>
+      </label>
+    </div>
+
+    <button type="button" class="btn btn--primary btn--block" id="notify-activate">
+      <i class="fa-solid fa-bell" aria-hidden="true"></i>
+      Ativar notificações
+    </button>
+
+    <button type="button" class="btn btn--ghost btn--block" id="notify-disable" hidden>
+      <i class="fa-solid fa-bell-slash" aria-hidden="true"></i>
+      Desativar lembretes
+    </button>
+
+    <p class="notify-modal__status" id="notify-status" role="status"></p>
+
+    <ul class="notify-upcoming" id="notify-upcoming"></ul>
+  </div>
+</div>

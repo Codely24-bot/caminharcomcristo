@@ -5,12 +5,12 @@
    ============================================================ */
 "use strict";
 
-const CACHE_PREFIX = "igrejacaminhar-v2";
+const CACHE_PREFIX = "igrejacaminhar-v3";
 const PRECACHE_URLS = [
   "/",
-  "/static/css/style.css?v=4",
-  "/static/css/responsive.css?v=4",
-  "/static/js/main.js?v=4",
+  "/static/css/style.css?v=5",
+  "/static/css/responsive.css?v=5",
+  "/static/js/main.js?v=5",
   "/static/images/pwa/icon-192.png",
   "/static/images/pwa/icon-512.png",
   "/static/images/pwa/icon-maskable-512.png",
@@ -98,4 +98,53 @@ self.addEventListener("fetch", (event) => {
       })
     );
   }
+});
+
+/* ============================================================
+   Notificações push (Web Push / VAPID)
+   ============================================================ */
+self.addEventListener("push", (event) => {
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch (e) {
+    data = {};
+  }
+
+  const title = data.title || "Igreja Caminhar";
+  const options = {
+    body: data.body || "Não perca os próximos cultos e eventos!",
+    icon: "/static/images/pwa/icon-192.png",
+    badge: "/static/images/pwa/icon-192.png",
+    vibrate: [100, 60, 100],
+    data: {
+      url: data.url || "/",
+    },
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+
+  let target = "/";
+  if (event.notification.data && event.notification.data.url) {
+    target = event.notification.data.url;
+  }
+
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((windowClients) => {
+      for (const client of windowClients) {
+        if ("focus" in client) {
+          client.focus();
+          if (client.url === target) return;
+          return client.navigate(target);
+        }
+      }
+      if (self.clients.openWindow) {
+        return self.clients.openWindow(target);
+      }
+    })
+  );
 });

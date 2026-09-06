@@ -164,7 +164,7 @@
     bottom: 0;
     width: min(80vw, 360px);
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
     gap: 0.25rem;
     padding: 1.5rem 2rem 2rem;
@@ -201,9 +201,16 @@
   }
 
   .nav-link::after {
-    left: 0.6rem;
+    left: 50%;
     right: auto;
     width: 34px;
+    transform: translateX(-50%);
+    transform-origin: center;
+  }
+
+  .nav-link--active::after,
+  .nav-link:hover::after {
+    transform: translateX(-50%) scaleX(1);
   }
 
   .nav-backdrop {
@@ -322,6 +329,122 @@
   .nav-toggle {
     width: 42px;
     height: 42px;
+  }
+}
+
+/* ============================================================
+   < 767px (centralização completa no mobile)
+   ============================================================ */
+@media (max-width: 767px) {
+  .contact-info__card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .value-list li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .visit-list li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .next-service__head,
+  .hero__actions,
+  .cta-banner__actions,
+  .notfound__actions,
+  .cta-inline__actions {
+    justify-content: center;
+  }
+
+  .section-cta {
+    justify-content: center;
+  }
+
+  .btn {
+    margin-inline: auto;
+  }
+
+  .hero__text,
+  .page-hero__title,
+  .page-hero__text {
+    margin-inline: auto;
+  }
+
+  .hero__next-service {
+    text-align: center;
+  }
+
+  .prose p {
+    margin-inline: auto;
+  }
+
+  .contact-info__card a,
+  .contact-info__card span {
+    justify-content: center;
+  }
+
+  .service-card,
+  .ministry-card,
+  .event-card__body,
+  .message-card,
+  .value-card,
+  .step,
+  .past-event__body,
+  .faq-item {
+    text-align: center;
+    align-items: center;
+  }
+
+  .message-card__media {
+    margin-inline: auto;
+  }
+
+  .value-card i,
+  .ministry-card__icon,
+  .service-card__icon {
+    margin-inline: auto;
+  }
+
+  .form__field,
+  .contact-form-wrap {
+    text-align: center;
+  }
+
+  .form__field input,
+  .form__field textarea {
+    text-align: center;
+  }
+
+  .form__note {
+    justify-content: center;
+  }
+
+  .about-card__badge {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .footer-col {
+    text-align: center;
+  }
+
+  .footer-map {
+    justify-content: center;
+  }
+
+  .faq-item summary {
+    justify-content: center;
+  }
+
+  .notify-option {
+    justify-content: center;
+    text-align: center;
   }
 }
 
