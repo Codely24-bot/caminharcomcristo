@@ -25,6 +25,7 @@ const MINUTES_BEFORE = Math.max(
 const STORE_FILE = path.join(__dirname, "..", "data", "notifications.json");
 
 const enabled = Boolean(PUBLIC_KEY && PRIVATE_KEY);
+const TEST_ENABLED = enabled && String(process.env.NODE_ENV || "").toLowerCase() !== "production";
 
 if (enabled) {
   webpush.setVapidDetails(SUBJECT, PUBLIC_KEY, PRIVATE_KEY);
@@ -205,6 +206,19 @@ function fire(item, kind) {
   scheduleNext();
 }
 
+function sendTestNotification() {
+  if (!enabled || !subscriptions.size) {
+    return { sent: 0, total: 0 };
+  }
+  const subs = Array.from(subscriptions.values());
+  sendPayload(subs, {
+    title: "Notificação de teste",
+    body: "Você está recebendo os lembretes da Igreja Caminhar. Funcionou!",
+    url: "/",
+  });
+  return { sent: subs.length, total: subscriptions.size };
+}
+
 function scheduleNext() {
   if (!enabled || scheduleTimer) return;
 
@@ -273,10 +287,26 @@ function installNotifications(app) {
     res.json({
       ok: true,
       enabled,
+      test_enabled: TEST_ENABLED,
       public_key: PUBLIC_KEY,
       minutes_before: MINUTES_BEFORE,
       upcoming: upcomingReminders(5),
     });
+  });
+
+  // Enviar notificação de teste (apenas em desenvolvimento)
+  app.post("/api/notifications/test", (_req, res) => {
+    if (!TEST_ENABLED) {
+      return res.status(404).json({ ok: false, error: "Não disponível." });
+    }
+    const result = sendTestNotification();
+    if (!result.sent) {
+      return res.status(400).json({
+        ok: false,
+        error: "Nenhum dispositivo inscrito ainda. Ative os lembretes pelo rodapé da página.",
+      });
+    }
+    res.json({ ok: true, sent: result.sent });
   });
 
   // Inscrever um dispositivo
@@ -341,4 +371,4 @@ setInterval(() => {
   }
 }, 60 * 60 * 1000);
 
-module.exports = { installNotifications, enabled, upcomingReminders };
+module.exports = { installNotifications, enabled, upcomingReminders, sendTestNotification };

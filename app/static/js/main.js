@@ -287,6 +287,7 @@
     var statusEl = doc.getElementById("notify-status");
     var activateBtn = doc.getElementById("notify-activate");
     var disableBtn = doc.getElementById("notify-disable");
+    var testBtn = doc.getElementById("notify-test");
     var servicesCheck = doc.getElementById("notify-services");
     var eventsCheck = doc.getElementById("notify-events");
     var upcomingEl = doc.getElementById("notify-upcoming");
@@ -371,6 +372,30 @@
     function refreshButtons() {
       if (activateBtn) activateBtn.hidden = isSubscribed;
       if (disableBtn) disableBtn.hidden = !isSubscribed;
+    }
+
+    function sendTest() {
+      if (!isSubscribed) {
+        setStatus("Ative primeiro as notificações para enviar o teste.", false);
+        return;
+      }
+      setStatus("Enviando notificação de teste...");
+      fetch("/api/notifications/test", { method: "POST" })
+        .then(function (r) {
+          return r.json().then(function (json) {
+            return { ok: r.ok, json: json };
+          });
+        })
+        .then(function (res) {
+          if (res.ok) {
+            setStatus("Teste enviado! Confira a notificação no seu dispositivo.", true);
+          } else {
+            setStatus(res.json.error || "Falha ao enviar o teste.", false);
+          }
+        })
+        .catch(function () {
+          setStatus("Não foi possível enviar o teste.", false);
+        });
     }
 
     function subscribe() {
@@ -463,6 +488,9 @@
           vapidKey = cfg.public_key;
           renderUpcoming(cfg.upcoming);
         }
+        if (cfg.test_enabled && testBtn) {
+          testBtn.hidden = false;
+        }
       });
 
       // Estado já inscrito?
@@ -500,6 +528,7 @@
 
       if (activateBtn) activateBtn.addEventListener("click", subscribe);
       if (disableBtn) disableBtn.addEventListener("click", unsubscribe);
+      if (testBtn) testBtn.addEventListener("click", sendTest);
 
       // Fluxo de instalação do PWA: ao instalar, oferece as notificações
       window.addEventListener("beforeinstallprompt", function (e) {

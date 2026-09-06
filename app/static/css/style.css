@@ -2671,6 +2671,28 @@ h1, h2, h3, h4 {
   font-size: 0.95rem;
 }
 
+/* ----- Sino flutuante (sempre visível) ----- */
+.notify-float {
+  position: fixed;
+  left: clamp(1rem, 2.5vw, 1.6rem);
+  bottom: clamp(1rem, 2.5vw, 1.6rem);
+  z-index: 70;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--grad-accent);
+  color: var(--on-accent);
+  font-size: 1.5rem;
+  box-shadow: var(--shadow-accent);
+  transition: transform 0.3s var(--ease);
+}
+
+.notify-float:hover {
+  transform: scale(1.1) translateY(-3px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .app-splash__logo {
     animation: none;

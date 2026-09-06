@@ -311,6 +311,14 @@
     right: 0.9rem;
     bottom: 0.9rem;
   }
+
+  .notify-float {
+    width: 54px;
+    height: 54px;
+    font-size: 1.4rem;
+    left: 0.9rem;
+    bottom: 0.9rem;
+  }
 }
 
 /* ============================================================

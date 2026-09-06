@@ -1,3 +1,7 @@
+<button type="button" class="notify-float" data-notify-open aria-label="Ativar lembretes de cultos e eventos" title="Ativar lembretes">
+  <i class="fa-solid fa-bell" aria-hidden="true"></i>
+</button>
+
 <div class="notify-modal" id="notify-modal" hidden>
   <div class="notify-modal__card" role="dialog" aria-modal="true" aria-labelledby="notify-title">
     <button type="button" class="notify-modal__close" id="notify-close" aria-label="Fechar">
@@ -39,6 +43,11 @@
     <button type="button" class="btn btn--ghost btn--block" id="notify-disable" hidden>
       <i class="fa-solid fa-bell-slash" aria-hidden="true"></i>
       Desativar lembretes
+    </button>
+
+    <button type="button" class="btn btn--ghost btn--block notify-test" id="notify-test" hidden>
+      <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+      Enviar notificação de teste
     </button>
 
     <p class="notify-modal__status" id="notify-status" role="status"></p>
