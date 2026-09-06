@@ -73,8 +73,8 @@
   --container: 1180px;
   --header-h: 88px;
 
-  --font-display: "Sora", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
+  --font-display: "Roboto", system-ui, sans-serif;
+  --font-body: "Roboto", system-ui, sans-serif;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
@@ -168,6 +168,7 @@ body {
   color: var(--text);
   background-color: var(--bg);
   padding-top: 88px;
+  text-align: center;
   background-image:
     radial-gradient(1200px 700px at 80% -10%, var(--glow-1), transparent 60%),
     radial-gradient(900px 600px at -10% 30%, var(--glow-2), transparent 55%);
@@ -341,8 +342,8 @@ h1, h2, h3, h4 {
 }
 
 .section-head--left {
-  margin-inline: 0;
-  text-align: left;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .section-title {
@@ -1058,6 +1059,7 @@ h1, h2, h3, h4 {
 .service-card__meta {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.7rem;
 }
 
@@ -1127,6 +1129,7 @@ h1, h2, h3, h4 {
 .ministry-card__link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
@@ -1206,6 +1209,7 @@ h1, h2, h3, h4 {
 .event-card__body {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.6rem;
   padding: 1.4rem 1.5rem 1.6rem;
 }
@@ -1223,6 +1227,7 @@ h1, h2, h3, h4 {
 .event-card__meta {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.6rem 1.2rem;
   margin-top: 0.4rem;
   color: var(--muted-2);
@@ -1269,7 +1274,8 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 0.6rem;
   padding: clamp(1.5rem, 3vw, 2rem);
 }
@@ -1277,11 +1283,13 @@ h1, h2, h3, h4 {
 .past-event__body h3 {
   font-size: 1.35rem;
   font-weight: 700;
+  text-align: center;
 }
 
 .past-event__body p {
   color: var(--muted);
   font-size: 0.95rem;
+  text-align: center;
 }
 
 /* ============================================================
@@ -1346,6 +1354,7 @@ h1, h2, h3, h4 {
 .breadcrumb {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.55rem;
   font-size: 0.82rem;
   color: var(--muted-2);
@@ -2116,6 +2125,7 @@ h1, h2, h3, h4 {
   padding: 0 1.4rem 1.3rem;
   color: var(--muted);
   font-size: 0.95rem;
+  text-align: center;
 }
 
 /* ============================================================
@@ -2176,6 +2186,7 @@ h1, h2, h3, h4 {
 .footer-brand {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.7rem;
   margin-bottom: 1.2rem;
 }
@@ -2201,6 +2212,7 @@ h1, h2, h3, h4 {
 
 .footer-social {
   display: flex;
+  justify-content: center;
   gap: 0.7rem;
   margin-top: 1.3rem;
 }
@@ -2233,6 +2245,8 @@ h1, h2, h3, h4 {
 .footer-links,
 .footer-services {
   display: grid;
+  justify-items: center;
+  text-align: center;
   gap: 0.65rem;
 }
 
@@ -2250,6 +2264,8 @@ h1, h2, h3, h4 {
 .footer-services li {
   display: grid;
   grid-template-columns: auto 1fr;
+  justify-items: center;
+  text-align: center;
   gap: 0.15rem 0.6rem;
   font-size: 0.9rem;
 }
@@ -2301,13 +2317,14 @@ h1, h2, h3, h4 {
 .footer-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 0.6rem;
   padding-block: 1.4rem;
   border-top: 1px solid var(--line);
   font-size: 0.82rem;
   color: var(--muted-2);
+  text-align: center;
 }
 
 .footer-bottom i {
