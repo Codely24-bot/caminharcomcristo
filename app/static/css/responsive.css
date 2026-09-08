@@ -468,3 +468,28 @@
     min-width: 0;
   }
 }
+
+/* ============================================================
+   Modal de notificações em telas pequenas / baixas
+   ============================================================ */
+@media (max-width: 480px) {
+  .notify-modal {
+    padding: 0.75rem;
+  }
+
+  .notify-modal__card {
+    max-height: calc(100dvh - 1.5rem);
+    max-height: calc(100vh - 1.5rem);
+    padding: 1.4rem 1.1rem;
+  }
+}
+
+@media (max-height: 560px) {
+  .notify-modal {
+    align-items: flex-start;
+  }
+
+  .notify-modal__card {
+    margin-block: 1rem auto;
+  }
+}
