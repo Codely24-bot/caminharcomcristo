@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <a href="{{ url('main.index') }}">Início</a>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      <span>CSC</span>
+    </nav>
+    <span class="eyebrow eyebrow--hero">Ação social</span>
+    <h1 class="page-hero__title">Centro Social <span class="text-gradient">Caminhar</span></h1>
+    <p class="page-hero__text">
+      O <strong>CSC</strong> é o braço social da {{ site.church_name }}: um caminho de amor,
+      dignidade e propósito para as famílias da nossa comunidade.
+    </p>
+  </div>
+</section>
+
+<section class="section about-detail">
+  <div class="container about-detail__grid">
+    <div class="about-detail__body">
+      <div class="section-head section-head--left" data-reveal="fade-up">
+        <span class="eyebrow">Nosso propósito</span>
+        <h2 class="section-title">O amor de Deus em <span class="text-gradient">gestos concretos</span></h2>
+      </div>
+      <div class="prose" data-reveal="fade-up">
+        <p>
+          O Centro Social Caminhar nasceu do mesmo coração da {{ site.church_name }}:
+          <em>amar a Deus, valorizar pessoas e caminhar juntos</em>. Somos as mãos de Jesus
+          dentro e fora dos nossos muros, cuidando de quem mais precisa com respeito, alegria
+          e amor.
+        </p>
+        <p>
+          Atendemos famílias da nossa comunidade em diferentes necessidades, buscando sempre
+          mais do que o alívio imediato: queremos restaurar esperança, gerar dignidade e abrir
+          caminhos para que cada pessoa possa recomeçar.
+        </p>
+        <blockquote>
+          <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
+          Em verdade vos digo que, quando o fizestes a um destes meus pequeninos irmãos, a mim o fizestes.
+          <cite>Mateus 25.40</cite>
+        </blockquote>
+      </div>
+    </div>
+    <div class="about-detail__media" data-reveal="fade-up">
+      <div class="ministry-placeholder">
+        <i class="fa-solid fa-heart" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tinted">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Frentes de ação',
+        'Como o CSC caminha com as famílias',
+        'Você pode fazer parte ajudando a construir esperança.'
+    ) }}
+
+    <div class="value-cards">
+      <article class="value-card" data-reveal="fade-up">
+        <span class="value-card__num">01</span>
+        <i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>
+        <h3>Alimentos</h3>
+        <p>Distribuímos cestas básicas e organizamos campanhas para levar sustento à mesa de cada lar.</p>
+      </article>
+      <article class="value-card" data-reveal="fade-up" data-delay="100">
+        <span class="value-card__num">02</span>
+        <i class="fa-solid fa-shirt" aria-hidden="true"></i>
+        <h3>Roupas e agasalhos</h3>
+        <p>Doações de roupas, calçados e cobertores, com acolhimento e carinho em cada entrega.</p>
+      </article>
+      <article class="value-card" data-reveal="fade-up" data-delay="200">
+        <span class="value-card__num">03</span>
+        <i class="fa-solid fa-hands-praying" aria-hidden="true"></i>
+        <h3>Cuidado com as famílias</h3>
+        <p>Visitamos e acompanhamos famílias, oferecendo oração, escuta e apoio em momentos difíceis.</p>
+      </article>
+      <article class="value-card" data-reveal="fade-up" data-delay="300">
+        <span class="value-card__num">04</span>
+        <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+        <h3>Voluntariado</h3>
+        <p>Somamos mãos e talentos: cada voluntário é um abraço de Deus para a nossa comunidade.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-inline" data-reveal="fade-up">
+      <div>
+        <h2 class="cta-inline__title">Quer participar do CSC?</h2>
+        <p>
+          Seja como voluntário, doando ou indicando quem precisa de ajuda — há espaço para
+          você neste caminho.
+        </p>
+      </div>
+      <div class="cta-inline__actions">
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Falar com a equipe
+        </a>
+        <a href="{{ url('main.contato') }}#form" class="btn btn--ghost">
+          Fale conosco <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

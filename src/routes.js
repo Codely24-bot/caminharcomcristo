@@ -38,6 +38,11 @@ const PAGES = {
     description:
       "Acompanhe os próximos eventos da Igreja Caminhar: batismos, cultos especiais, encontros e muito mais.",
   },
+  csc: {
+    title: "CSC – Centro Social Caminhar | Igreja Caminhar",
+    description:
+      "Conheça o Centro Social Caminhar (CSC): a ação social da Igreja Caminhar servindo as famílias com amor, dignidade e propósito.",
+  },
   mensagens: {
     title: "Mensagens | Igreja Caminhar",
     description:
@@ -159,6 +164,10 @@ function installRoutes(app) {
 
   app.get("/sobre", (_req, res) => {
     res.render("sobre.html");
+  });
+
+  app.get("/csc", (_req, res) => {
+    res.render("csc.html");
   });
 
   app.get("/ministerios", (_req, res) => {

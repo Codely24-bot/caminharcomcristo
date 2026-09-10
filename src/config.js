@@ -45,15 +45,30 @@ const SITE_CONFIG = {
     {
       name: "Culto de Celebração",
       day: "Domingo",
+      time: "08:40",
+      icon: "fa-solid fa-church",
+      description:
+        "O primeiro culto do dia, um encontro de fé e entrega para começar a semana com Deus.",
+    },
+    {
+      name: "Culto de Celebração",
+      day: "Domingo",
       time: "19:00",
       icon: "fa-solid fa-church",
       description:
         "O encontro principal da família, com adoração, Palavra e edificação para todas as idades.",
     },
     {
+      name: "Grupo de Oração",
+      day: "Terça",
+      time: "20:00",
+      icon: "fa-solid fa-hands-praying",
+      description: "Noite de oração, intercessão e busca pela vontade de Deus.",
+    },
+    {
       name: "Culto de Quarta",
       day: "Quarta-feira",
-      time: "19:30",
+      time: "19:00",
       icon: "fa-solid fa-hands-praying",
       description: "Uma noite de entrega, oração e avivamento no meio da semana.",
     },
@@ -111,13 +126,13 @@ const SITE_CONFIG = {
       image: "",
     },
     {
-      name: "Geração Kids",
+      name: "Caminhar Kids",
       icon: "fa-solid fa-child-reaching",
       slug: "kids",
       summary:
         "Ensino bíblico lúdico e seguro para o crescimento espiritual das nossas crianças.",
       description:
-        "A Geração Kids recebe as crianças com amor, segurança e ensino bíblico criativo em todos os cultos. Aqui elas aprendem, brincam e descobrem, desde cedo, o quanto Deus é bom — enquanto os pais participam do culto com o coração tranquilo.",
+        "A Caminhar Kids recebe as crianças com amor, segurança e ensino bíblico criativo em todos os cultos. Aqui elas aprendem, brincam e descobrem, desde cedo, o quanto Deus é bom — enquanto os pais participam do culto com o coração tranquilo.",
       points: [
         "Berçário e turmas por faixa etária",
         "Ensino bíblico lúdico e seguro",
@@ -295,7 +310,7 @@ const SITE_CONFIG = {
     {
       question: "Há programação para crianças?",
       answer:
-        "Sim! Durante todos os cultos, a Geração Kids recebe as crianças com atividades e ensino apropriado para cada faixa etária, em ambiente seguro.",
+        "Sim! Durante todos os cultos, a Caminhar Kids recebe as crianças com atividades e ensino apropriado para cada faixa etária, em ambiente seguro.",
     },
     {
       question: "Preciso confirmar presença para visitar?",
