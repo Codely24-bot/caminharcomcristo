@@ -315,9 +315,9 @@
   .ig-float {
     right: 0.9rem;
     bottom: calc(0.9rem + 54px + 0.8rem);
-    width: 46px;
-    height: 46px;
-    font-size: 1.3rem;
+    width: 54px;
+    height: 54px;
+    font-size: 1.5rem;
   }
 
   .notify-float {
