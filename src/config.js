@@ -192,7 +192,7 @@ const SITE_CONFIG = {
         ref: "Romanos 15.7",
       },
       schedule: "Todos os cultos, 30 minutos antes",
-      image: "",
+      image: "images/ministerios/Voluntarios.jpeg",
     },
   ],
 
