@@ -137,7 +137,7 @@
       if (e.key === "Escape") closeMenu();
     });
 
-    var mq = window.matchMedia("(min-width: 1120px)");
+    var mq = window.matchMedia("(min-width: 1280px)");
     mq.addEventListener("change", function (e) {
       if (e.matches) closeMenu();
     });

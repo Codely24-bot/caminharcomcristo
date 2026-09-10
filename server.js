@@ -77,6 +77,7 @@ const PAGE_ROUTES = {
   "main.cultos": "/cultos",
   "main.eventos": "/eventos",
   "main.csc": "/csc",
+  "main.nova-caminhar": "/nova-caminhar",
   "main.mensagens": "/mensagens",
   "main.contato": "/contato",
 };

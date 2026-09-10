@@ -1,7 +1,7 @@
 /* ============================================================
    IGREJA CAMINHAR — responsive.css
    Consultas mobile-first (min-width). Também ajusta o menu
-   móvel para telas menores que 1120px.
+   móvel para telas menores que 1280px.
    ============================================================ */
 
 /* ===================== < 640px ===================== */
@@ -139,9 +139,9 @@
 }
 
 /* ============================================================
-   MENU MÓVEL (< 1120px)
+   MENU MÓVEL (< 1280px)
    ============================================================ */
-@media (max-width: 1119px) {
+@media (max-width: 1279px) {
   body {
     padding-bottom: 0;
   }
@@ -361,7 +361,7 @@
 }
 
 /* Garantia contra scroll horizontal */
-@media (max-width: 1119px) {
+@media (max-width: 1279px) {
   .top-bar__info,
   .navbar__inner {
     flex-wrap: nowrap;

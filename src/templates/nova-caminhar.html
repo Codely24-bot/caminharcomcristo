@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Trilha de navegação">
+      <a href="{{ url('main.index') }}">Início</a>
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      <span>Nova Caminhar</span>
+    </nav>
+    <span class="eyebrow eyebrow--hero">Obra de expansão</span>
+    <h1 class="page-hero__title">Nova <span class="text-gradient">Caminhar</span></h1>
+    <p class="page-hero__text">
+      Estamos ampliando a nossa casa. Acompanhe aqui a evolução da obra
+      e veja como vai ficar o novo espaço da {{ site.church_name }}.
+    </p>
+  </div>
+</section>
+
+<section class="section about-detail">
+  <div class="container about-detail__grid">
+    <div class="about-detail__body">
+      <div class="section-head section-head--left" data-reveal="fade-up">
+        <span class="eyebrow">O projeto</span>
+        <h2 class="section-title">Um lar maior para <span class="text-gradient">mais famílias</span></h2>
+      </div>
+      <div class="prose" data-reveal="fade-up">
+        <p>
+          A {{ site.church_name }} está em obra! Estamos ampliando o nosso templo para
+          receber ainda mais pessoas com mais espaço, conforto e estrutura — sem deixar de
+          lado o que importa: <em>amar a Deus, valorizar pessoas e caminhar juntos</em>.
+        </p>
+        <p>
+          Esta expansão é um marco na nossa história e torna-se realidade com a união de
+          toda a família. Continue aqui para acompanhar cada etapa da construção e conferir
+          como ficará o nosso novo espaço.
+        </p>
+      </div>
+    </div>
+    <div class="about-detail__media" data-reveal="fade-up">
+      <div class="ministry-placeholder">
+        <i class="fa-solid fa-building" aria-hidden="true"></i>
+      </div>
+      <p class="about-detail__caption">Em breve: imagem do projeto / como vai ficar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tinted">
+  <div class="container">
+    {% from "partials/section_heading.html" import section_heading %}
+    {{ section_heading(
+        'Evolução da obra',
+        'Acompanhe cada etapa',
+        'Fotos reais da nossa construção, fase por fase.'
+    ) }}
+
+    <div class="obra-grid">
+      <article class="obra-card" data-reveal="fade-up">
+        <div class="obra-card__media ministry-placeholder">
+          <i class="fa-solid fa-vector-square" aria-hidden="true"></i>
+        </div>
+        <div class="obra-card__body">
+          <h3>Fase 1</h3>
+          <p>Fundação e estrutura inicial.</p>
+        </div>
+      </article>
+      <article class="obra-card" data-reveal="fade-up" data-delay="100">
+        <div class="obra-card__media ministry-placeholder">
+          <i class="fa-solid fa-trowel-bricks" aria-hidden="true"></i>
+        </div>
+        <div class="obra-card__body">
+          <h3>Fase 2</h3>
+          <p>Paredes, laje e fechamento.</p>
+        </div>
+      </article>
+      <article class="obra-card" data-reveal="fade-up" data-delay="200">
+        <div class="obra-card__media ministry-placeholder">
+          <i class="fa-solid fa-paint-roller" aria-hidden="true"></i>
+        </div>
+        <div class="obra-card__body">
+          <h3>Fase 3</h3>
+          <p>Acabamento e detalhes finais.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-inline" data-reveal="fade-up">
+      <div>
+        <h2 class="cta-inline__title">Ore pela nossa obra</h2>
+        <p>
+          Cada tijolo desta construção é levantado em oração. Junte-se a nós e acompanhe
+          de perto este momento na vida da igreja.
+        </p>
+      </div>
+      <div class="cta-inline__actions">
+        <a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+          <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Falar com a equipe
+        </a>
+        <a href="{{ url('main.cultos') }}" class="btn btn--ghost">
+          Ver horários de culto <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
