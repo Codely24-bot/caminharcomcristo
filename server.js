@@ -76,6 +76,7 @@ const PAGE_ROUTES = {
   "main.ministerios": "/ministerios",
   "main.cultos": "/cultos",
   "main.eventos": "/eventos",
+  "main.csc": "/csc",
   "main.mensagens": "/mensagens",
   "main.contato": "/contato",
 };
