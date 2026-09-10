@@ -143,6 +143,46 @@
     });
   }
 
+  /* ---------- Hero em loop (crossfade) ---------- */
+  (function () {
+    var slides = [].slice.call(doc.querySelectorAll(".hero__slide"));
+    if (slides.length < 2) return;
+
+    var index = 0;
+    var interval = 6000;
+    var reduceMotion = false;
+    try {
+      reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (e) {}
+
+    function goTo(n) {
+      index = (n + slides.length) % slides.length;
+      slides.forEach(function (s, i) {
+        s.classList.toggle("is-active", i === index);
+      });
+    }
+
+    if (reduceMotion) {
+      return; // mostra apenas a primeira foto
+    }
+
+    var timer = setInterval(function () {
+      goTo(index + 1);
+    }, interval);
+
+    // pausa quando a aba está oculta
+    doc.addEventListener("visibilitychange", function () {
+      if (doc.hidden) {
+        clearInterval(timer);
+        timer = null;
+      } else if (!timer) {
+        timer = setInterval(function () {
+          goTo(index + 1);
+        }, interval);
+      }
+    });
+  })();
+
   /* ---------- Reveal ao scroll (Intersection Observer) ---------- */
   var revealEls = doc.querySelectorAll("[data-reveal]");
 

@@ -759,6 +759,24 @@ h1, h2, h3, h4 {
   display: block;
 }
 
+.hero__slider {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.4s ease, visibility 1.4s ease;
+}
+
+.hero__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
 .hero__overlay {
   position: absolute;
   inset: 0;
