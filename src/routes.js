@@ -173,6 +173,7 @@ function installRoutes(app) {
     }
     res.render("ministerio.html", {
       ministry,
+      other_ministries: SITE_CONFIG.ministries.filter((m) => m.slug !== slug),
       seo_title: `${ministry.name} | Igreja Caminhar`,
       seo_description: ministry.summary,
       whatsapp_url: whatsappLink(

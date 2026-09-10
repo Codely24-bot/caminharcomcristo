@@ -90,7 +90,7 @@
     ) }}
 
     <div class="ministries-grid ministries-grid--all">
-      {% for other in site.ministries if other.slug != ministry.slug %}
+      {% for other in other_ministries %}
         {% set card_delay = loop.index0 * 60 %}
         {% set ministry = other %}
         {% include "components/ministry_card.html" %}
