@@ -87,7 +87,7 @@ const SITE_CONFIG = {
         ref: "Salmos 106.1",
       },
       schedule: "Ensaios aos sábados, às 16h",
-      image: "",
+      image: "images/ministerios/Louvor.jpeg",
     },
     {
       name: "Intercessão",
