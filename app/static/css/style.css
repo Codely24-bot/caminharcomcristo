@@ -3065,6 +3065,19 @@ section:has(> .btn) {
   text-align: center;
 }
 
+/* ============================================================
+   HEADER DESKTOP — logo mais à esquerda
+   ============================================================ */
+@media (min-width: 1280px) {
+  .navbar__inner {
+    padding-inline-start: 1rem;
+  }
+
+  .navbar__inner > .brand {
+    margin-right: clamp(2rem, 5vw, 4.5rem);
+  }
+}
+
 .form__note {
   justify-content: center;
 }
