@@ -2977,6 +2977,17 @@ h1, h2, h3, h4 {
   justify-content: center;
 }
 
+/* CTA inline: centraliza todo o bloco (texto + botões) */
+.cta-inline {
+  justify-content: center;
+}
+
+/* Qualquer divisor que envolve botões diretamente */
+div:has(> .btn),
+section:has(> .btn) {
+  text-align: center;
+}
+
 .btn {
   margin-inline: auto;
 }
