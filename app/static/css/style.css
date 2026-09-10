@@ -2448,6 +2448,27 @@ h1, h2, h3, h4 {
 /* ============================================================
    WHATSAPP FLOAT
    ============================================================ */
+.ig-float {
+  position: fixed;
+  right: clamp(1rem, 2.5vw, 1.6rem);
+  bottom: calc(clamp(1rem, 2.5vw, 1.6rem) + 58px + 0.85rem);
+  z-index: 70;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #feda75, #d62976 45%, #962fbf 75%, #4f5bd5);
+  color: #fff;
+  font-size: 1.35rem;
+  box-shadow: 0 12px 28px rgba(214, 41, 118, 0.35);
+  transition: transform 0.3s var(--ease);
+}
+
+.ig-float:hover {
+  transform: scale(1.1) translateY(-3px);
+}
+
 .wa-float {
   position: fixed;
   right: clamp(1rem, 2.5vw, 1.6rem);
