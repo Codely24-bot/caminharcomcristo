@@ -165,6 +165,22 @@ function installRoutes(app) {
     res.render("ministerios.html");
   });
 
+  app.get("/ministerios/:slug", (req, res) => {
+    const slug = (req.params.slug || "").toLowerCase();
+    const ministry = SITE_CONFIG.ministries.find((m) => m.slug === slug);
+    if (!ministry) {
+      return res.status(404).render("404.html");
+    }
+    res.render("ministerio.html", {
+      ministry,
+      seo_title: `${ministry.name} | Igreja Caminhar`,
+      seo_description: ministry.summary,
+      whatsapp_url: whatsappLink(
+        `Olá! Vim pelo site e gostaria de mais informações sobre o ministério de ${ministry.name}.`
+      ),
+    });
+  });
+
   app.get("/cultos", (_req, res) => {
     res.render("cultos.html");
   });

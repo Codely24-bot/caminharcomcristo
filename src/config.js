@@ -74,6 +74,20 @@ const SITE_CONFIG = {
       slug: "louvor",
       summary:
         "Equipe que conduz a igreja em adoração, preparando ambientes de encontro com Deus.",
+      description:
+        "O nosso ministério de louvor existe para conduzir cada culto como um encontro real com Deus. Músicos, cantores e técnicos que se preparam com excelência, unidade e um coração adorador, para que a igreja entre na presença e cante a grandeza do Senhor.",
+      points: [
+        "Vocais, teclado, violão, guitarra, baixo e bateria",
+        "Operação de som, mídia e projeção",
+        "Ensaios semanais e crescimento musical",
+        "Ambiente de adoração em todos os cultos",
+      ],
+      verse: {
+        text: "Louvai ao Senhor, porque ele é bom, porque a sua benignidade dura para sempre.",
+        ref: "Salmos 106.1",
+      },
+      schedule: "Ensaios aos sábados, às 16h",
+      image: "",
     },
     {
       name: "Intercessão",
@@ -81,6 +95,20 @@ const SITE_CONFIG = {
       slug: "intercessao",
       summary:
         "Homens e mulheres que se dedicam a orar pela igreja, pela cidade e pelas nações.",
+      description:
+        "A Intercessão é o coração da nossa casa. Homens e mulheres que se colocam diante de Deus em oração pela igreja, pelas famílias, pela cidade e pelas nações. São os que sustentam cada reunião, cada decisão e cada pessoa que chega ao Caminhar.",
+      points: [
+        "Escala semanal de oração",
+        "Vigílias e madrugadas de oração",
+        "Intercessão por todos os cultos",
+        "Oração pelos pedidos da igreja",
+      ],
+      verse: {
+        text: "Invoca-me, e te responderei; e anunciar-te-ei coisas grandes e firmes, que não sabes.",
+        ref: "Jeremias 33.3",
+      },
+      schedule: "Encontro de oração aos sábados, às 8h",
+      image: "",
     },
     {
       name: "Geração Kids",
@@ -88,6 +116,20 @@ const SITE_CONFIG = {
       slug: "kids",
       summary:
         "Ensino bíblico lúdico e seguro para o crescimento espiritual das nossas crianças.",
+      description:
+        "A Geração Kids recebe as crianças com amor, segurança e ensino bíblico criativo em todos os cultos. Aqui elas aprendem, brincam e descobrem, desde cedo, o quanto Deus é bom — enquanto os pais participam do culto com o coração tranquilo.",
+      points: [
+        "Berçário e turmas por faixa etária",
+        "Ensino bíblico lúdico e seguro",
+        "Músicas, histórias e brincadeiras",
+        "Professores capacitados e voluntários",
+      ],
+      verse: {
+        text: "Ensina a criança no caminho em que deve andar, e, ainda quando for velho, não se desviará dele.",
+        ref: "Provérbios 22.6",
+      },
+      schedule: "Durante todos os cultos",
+      image: "",
     },
     {
       name: "Jovens Caminhar",
@@ -95,6 +137,20 @@ const SITE_CONFIG = {
       slug: "jovens",
       summary:
         "Uma geração com fogo no coração do Pai, propósito e amizades que edificam.",
+      description:
+        "O Jovens Caminhar é uma geração com fogo no coração do Pai. Encontros que misturam adoração, Palavra, propósito e amizades que edificam. Um lugar para você ser visto, crescer e impactar a sua geração para Jesus.",
+      points: [
+        "Encontros semanais da juventude",
+        "Cultos e conferências de jovens",
+        "Discipulado e mentoria",
+        "Missões, ações sociais e evangelismo",
+      ],
+      verse: {
+        text: "Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus; eu te fortaleço, e te ajudo, e te sustento com a destra da minha justiça.",
+        ref: "Isaías 41.10",
+      },
+      schedule: "Encontros aos sábados, às 19h",
+      image: "",
     },
     {
       name: "Casais e Famílias",
@@ -102,6 +158,20 @@ const SITE_CONFIG = {
       slug: "familias",
       summary:
         "Rotas, encontros e aconselhamento que fortalecem o casamento e a vida familiar.",
+      description:
+        "O ministério de Casais e Famílias caminha ao lado de cada lar. Vivemos encontros, rotas e aconselhamento que fortalecem o casamento, a criação dos filhos e a vida em família, ajudando cada casa a ser um pedacinho do Reino aqui na terra.",
+      points: [
+        "Encontros de casais e celebrações",
+        "Rotas de casais e famílias",
+        "Aconselhamento e discipulado familiar",
+        "Estudos sobre criação de filhos",
+      ],
+      verse: {
+        text: "Eu e a minha casa serviremos ao Senhor.",
+        ref: "Josué 24.15",
+      },
+      schedule: "Reunião mensal e rotas contínuas",
+      image: "",
     },
     {
       name: "Acolhimento",
@@ -109,6 +179,20 @@ const SITE_CONFIG = {
       slug: "acolhimento",
       summary:
         "A primeira porta da casa: recebemos cada visitante com o amor de Cristo.",
+      description:
+        "O Acolhimento é a primeira porta da nossa casa. Somos recepção, sorriso, abraço e orientação — para que todo visitante se sinta esperado, cuidado e com vontade de voltar. É gente que ama receber pessoas da mesma forma que Deus nos recebe.",
+      points: [
+        "Recepção na entrada dos cultos",
+        "Boas-vindas e orientação a visitantes",
+        "Café e espaço de convivência",
+        "Acompanhamento de novos frequentadores",
+      ],
+      verse: {
+        text: "Portanto, recebei-vos uns aos outros, como também Cristo nos recebeu, para glória de Deus.",
+        ref: "Romanos 15.7",
+      },
+      schedule: "Todos os cultos, 30 minutos antes",
+      image: "",
     },
   ],
 

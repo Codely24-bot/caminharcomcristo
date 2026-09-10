@@ -4,7 +4,7 @@
   </div>
   <h3 class="ministry-card__name">{{ ministry.name }}</h3>
   <p class="ministry-card__desc">{{ ministry.summary }}</p>
-  <a href="{{ url('main.contato') }}#form" class="ministry-card__link">
-    Quero participar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+  <a href="{{ url('main.ministerios') }}/{{ ministry.slug }}" class="ministry-card__link">
+    Conhecer o ministério <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
   </a>
 </div>

@@ -2731,6 +2731,150 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
+   MINISTÉRIO (página individual)
+   ============================================================ */
+.ministry-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.ministry-detail__media {
+  position: relative;
+}
+
+.ministry-detail__media img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+}
+
+.ministry-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3.2;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(480px 320px at 30% 20%, rgba(233, 234, 236, 0.14), transparent 60%),
+    linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px dashed var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.ministry-placeholder i {
+  font-size: clamp(3.2rem, 9vw, 5rem);
+  color: var(--accent);
+  background: var(--icon-soft-bg, transparent);
+  width: 120px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  border-radius: 32px;
+  border: 1px solid var(--icon-soft-border, var(--line-strong));
+}
+
+.ministry-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: clamp(1.8rem, 3vw, 2.4rem) auto 0;
+  max-width: 560px;
+}
+
+.ministry-list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  color: var(--muted);
+}
+
+.ministry-list li:hover {
+  border-color: rgba(233, 234, 236, 0.35);
+}
+
+.ministry-list i {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(233, 234, 236, 0.12);
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+.ministry-cards {
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.ministry-card--informative {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.4rem 1.6rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.ministry-card--informative > i {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: var(--grad-accent);
+  color: var(--on-accent);
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-accent);
+}
+
+.ministry-card--informative small {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted-2);
+  margin-bottom: 0.2rem;
+}
+
+.ministry-card--informative strong {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text);
+}
+
+@media (min-width: 992px) {
+  .ministry-detail {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    align-items: center;
+  }
+
+  .ministry-list li {
+    justify-content: flex-start;
+  }
+
+  .ministry-list {
+    margin-inline: 0;
+    max-width: none;
+  }
+}
+
+/* ============================================================
    CENTRALIZAÇÃO GLOBAL — todos os textos ao centro
    ============================================================ */
 
