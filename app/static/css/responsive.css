@@ -281,6 +281,32 @@
     justify-content: center;
   }
 
+  .media-featured {
+    min-height: 300px;
+  }
+
+  .media-featured__play {
+    width: 60px;
+    height: 60px;
+  }
+
+  .media-featured__play i {
+    font-size: 1.1rem;
+  }
+
+  .media-featured__meta {
+    gap: 0.4rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .media-card__img {
+    aspect-ratio: 16 / 9;
+  }
+
   .verse-of-day {
     flex-direction: column;
     text-align: center;

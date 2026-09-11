@@ -21,23 +21,21 @@
 <section class="section section--tinted">
   <div class="container">
     {% if dailyVerse and dailyVerse.text %}
-      <div class="verse-of-day" data-reveal="fade-up" id="verse-of-day">
-        <div class="verse-of-day__icon" aria-hidden="true">
-          <i class="fa-solid fa-book-open"></i>
-        </div>
-        <div class="verse-of-day__body">
-          <span class="eyebrow">Versículo do dia</span>
-          <blockquote class="verse-of-day__text" id="verse-of-day-text">{{ dailyVerse.text }}</blockquote>
-          <cite class="verse-of-day__ref">
-            <span id="verse-of-day-ref">{{ dailyVerse.reference }}</span>
-            <span class="verse-of-day__translation">{{ dailyVerse.translation }}</span>
-          </cite>
-          <div class="verse-of-day__actions">
-            <button type="button" class="btn btn--share" id="share-verse" aria-label="Compartilhar versículo do dia">
-              <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
-              Compartilhar
-            </button>
-          </div>
+      <div class="verse-of-day verse-of-day--midia" data-reveal="fade-up" id="verse-of-day">
+        <span class="verse-of-day__label">
+          <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+          Versículo do Dia
+        </span>
+        <blockquote class="verse-of-day__text" id="verse-of-day-text">“{{ dailyVerse.text }}”</blockquote>
+        <cite class="verse-of-day__ref">
+          <span id="verse-of-day-ref">— {{ dailyVerse.reference }}</span>
+          <span class="verse-of-day__translation">{{ dailyVerse.translation }}</span>
+        </cite>
+        <div class="verse-of-day__actions">
+          <button type="button" class="btn btn--share" id="share-verse" aria-label="Compartilhar versículo do dia">
+            <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+            Compartilhar
+          </button>
         </div>
       </div>
     {% endif %}
@@ -46,45 +44,48 @@
 
 <section class="section">
   <div class="container">
-    <div class="message-filter" data-reveal="fade-up">
-      <button type="button" class="chip-btn is-active" data-filter="all">Todas</button>
-      {% set tags = site.messages | mapAttr('tag') | unique %}
-      {% for tag in tags %}
-        <button type="button" class="chip-btn" data-filter="{{ tag|lower }}">{{ tag }}</button>
-      {% endfor %}
+    <div class="midia-head" data-reveal="fade-up">
+      <span class="eyebrow">Mídia</span>
+      <h2 class="section-title">Mensagens que <span class="text-gradient">transformam vidas</span></h2>
+      <p class="section-text">Releia e compartilhe as mensagens ministradas em nossos cultos.</p>
     </div>
 
-    <div class="message-list">
+    {% set featured = site.messages[0] %}
+    <article class="media-featured" data-reveal="fade-up" aria-label="{{ featured.title }}">
+      <img class="media-featured__bg" src="{{ static(featured.image) }}" alt="{{ featured.title }}" loading="lazy">
+      <div class="media-featured__overlay" aria-hidden="true"></div>
+      <div class="media-featured__play" aria-hidden="true"><i class="fa-solid fa-play"></i></div>
+      <div class="media-featured__info">
+        <span class="chip chip--soft">{{ featured.tag }}</span>
+        <h3 class="media-featured__title">{{ featured.title }}</h3>
+        <p class="media-featured__meta">
+          <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> {{ featured.date }}</span>
+          <span><i class="fa-solid fa-user-tie" aria-hidden="true"></i> {{ featured.speaker }}</span>
+          <span><i class="fa-solid fa-book-bible" aria-hidden="true"></i> {{ featured.reference }}</span>
+          <span><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ featured.duration }}</span>
+        </p>
+      </div>
+    </article>
+
+    <div class="media-grid" data-reveal="fade-up">
       {% for message in site.messages %}
-        {% set verse = messageVerses[loop.index0] if messageVerses and messageVerses[loop.index0] and messageVerses[loop.index0].text else null %}
-        <article class="message-card" data-reveal="fade-up" data-category="{{ message.tag|lower }}" data-delay="{{ loop.index0 * 60 }}" data-ref="{{ message.reference }}" {% if verse %}data-verse-ready="true"{% endif %}>
-          <div class="message-card__media" aria-hidden="true">
-            <span class="message-card__icon"><i class="{{ message.icon }}"></i></span>
-            <button type="button" class="message-card__play" aria-label="Reproduzir {{ message.title }}">
-              <i class="fa-solid fa-play"></i>
-            </button>
-          </div>
-          <div class="message-card__body">
-            <div class="message-card__meta">
-              <span class="chip chip--soft">{{ message.tag }}</span>
-              <span class="message-card__date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> {{ message.date }}</span>
-              <span class="message-card__duration"><i class="fa-regular fa-clock" aria-hidden="true"></i> {{ message.duration }}</span>
+        {% if not loop.first %}
+          <article class="media-card">
+            <div class="media-card__img">
+              <img src="{{ static(message.image) }}" alt="{{ message.title }}" loading="lazy">
+              <span class="media-card__play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
             </div>
-            <h3 class="message-card__title">{{ message.title }}</h3>
-            <p class="message-card__info">
-              <i class="fa-solid fa-user-tie" aria-hidden="true"></i> {{ message.speaker }}
-              <span aria-hidden="true">·</span>
-              <i class="fa-solid fa-book-bible" aria-hidden="true"></i> {{ message.reference }}
-            </p>
-            {% if verse %}
-              <blockquote class="message-card__verse">
-                <i class="fa-solid fa-quote-left" aria-hidden="true"></i>
-                <span class="message-card__verse-text">{{ verse.text }}</span>
-                <span class="message-card__verse-ref">— {{ verse.reference }}</span>
-              </blockquote>
-            {% endif %}
-          </div>
-        </article>
+            <div class="media-card__body">
+              <span class="chip chip--soft">{{ message.tag }}</span>
+              <h4 class="media-card__title">{{ message.title }}</h4>
+              <p class="media-card__meta">
+                <span>{{ message.date }}</span>
+                <span aria-hidden="true">·</span>
+                <span>{{ message.speaker }}</span>
+              </p>
+            </div>
+          </article>
+        {% endif %}
       {% endfor %}
     </div>
 

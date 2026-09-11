@@ -255,6 +255,7 @@ const SITE_CONFIG = {
       duration: "42 min",
       tag: "Palavra",
       icon: "fa-solid fa-music",
+      image: "images/fotos-da-igreja/foto-hero.jpg",
     },
     {
       title: "O Poder de uma Vida em Comunhão",
@@ -264,6 +265,7 @@ const SITE_CONFIG = {
       duration: "38 min",
       tag: "Comunhão",
       icon: "fa-solid fa-people-group",
+      image: "images/fotos-da-igreja/familia-igreja.jpg",
     },
     {
       title: "Adorar no Meio da Luta",
@@ -273,6 +275,7 @@ const SITE_CONFIG = {
       duration: "45 min",
       tag: "Adoração",
       icon: "fa-solid fa-star-and-crescent",
+      image: "images/fotos-da-igreja/louvor-guitarra.jpg",
     },
     {
       title: "Construindo Famílias que Permanecem",
@@ -282,6 +285,7 @@ const SITE_CONFIG = {
       duration: "40 min",
       tag: "Família",
       icon: "fa-solid fa-people-roof",
+      image: "images/fotos-da-igreja/foto-sobre-igreja.jpg",
     },
     {
       title: "Quando o Sonho Parece Demorar",
@@ -291,6 +295,7 @@ const SITE_CONFIG = {
       duration: "36 min",
       tag: "Esperança",
       icon: "fa-solid fa-hourglass-half",
+      image: "images/fotos-da-igreja/hero-congregation.jpg",
     },
   ],
 

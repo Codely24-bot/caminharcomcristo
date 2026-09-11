@@ -212,71 +212,6 @@
     });
   }
 
-  /* ---------- Filtro de mensagens ---------- */
-  var filterBtns = doc.querySelectorAll(".chip-btn[data-filter]");
-  var messageCards = doc.querySelectorAll(".message-card[data-category]");
-
-  if (filterBtns.length) {
-    filterBtns.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        filterBtns.forEach(function (b) {
-          b.classList.remove("is-active");
-        });
-        btn.classList.add("is-active");
-
-        var filter = btn.getAttribute("data-filter");
-        messageCards.forEach(function (card) {
-          var cat = card.getAttribute("data-category");
-          var show = filter === "all" || cat === filter;
-          card.classList.toggle("is-hidden", !show);
-        });
-      });
-    });
-  }
-
-  /* ---------- Versículos (API bíblica) ---------- */
-  function injectVerse(card, data) {
-    var body = card.querySelector(".message-card__body");
-    if (!body) return;
-    var existing = card.querySelector("[data-verse-block]");
-    if (existing) existing.remove();
-
-    var block = doc.createElement("blockquote");
-    block.className = "message-card__verse";
-    block.setAttribute("data-verse-block", "");
-
-    var quote = doc.createElement("i");
-    quote.className = "fa-solid fa-quote-left";
-    quote.setAttribute("aria-hidden", "true");
-
-    var text = doc.createElement("span");
-    text.className = "message-card__verse-text";
-    text.textContent = data.text;
-
-    var cite = doc.createElement("span");
-    cite.className = "message-card__verse-ref";
-    cite.textContent = "\u2014 " + data.reference;
-
-    block.appendChild(quote);
-    block.appendChild(text);
-    block.appendChild(cite);
-    body.appendChild(block);
-    card.setAttribute("data-verse-ready", "true");
-  }
-
-  doc.querySelectorAll(".message-card[data-ref]").forEach(function (card) {
-    if (card.getAttribute("data-verse-ready") === "true") return;
-    var ref = card.getAttribute("data-ref");
-    fetch("/api/versiculo?ref=" + encodeURIComponent(ref))
-      .then(function (r) {
-        return r.json();
-      })
-      .then(function (json) {
-        if (json && json.ok && json.data) injectVerse(card, json.data);
-      })
-      .catch(function () {});
-  });
-
   /* ---------- Compartilhar versículo do dia (imagem com logo) ---------- */
   (function () {
     var shareBtn = doc.getElementById("share-verse");
@@ -387,7 +322,7 @@
       var fontSize = text.length > 190 ? 40 : 46;
       var lineHeight = Math.round(fontSize * 1.6);
       ctx.fillStyle = "#f2f2f4";
-      ctx.font = "500 " + fontSize + "px " + FONT;
+      ctx.font = "italic 500 " + fontSize + "px " + FONT;
       var lines = wrapLines(ctx, text, maxTextWidth);
       if (lines.length > 9) {
         lines = lines.slice(0, 9);
