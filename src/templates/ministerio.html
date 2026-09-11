@@ -80,6 +80,66 @@
   </div>
 </section>
 
+<section class="section" id="form">
+  <div class="container">
+    <div class="section-head section-head--center" data-reveal="fade-up">
+      <span class="eyebrow">Quero participar</span>
+      <h2 class="section-title">Comece a servir no {{ ministry.name }}</h2>
+      <p class="section-text">
+        Preencha os dados abaixo que a nossa equipe entra em contato com você.
+      </p>
+    </div>
+
+    <form method="post" action="/ministerios/{{ ministry.slug }}" class="form form--narrow" novalidate data-reveal="fade-up">
+      <input type="hidden" name="csrf_token" value="{{ csrfToken }}">
+
+      <div class="form__row">
+        <div class="form__field">
+          <label for="ministry-name">Nome <span class="form__req">*</span></label>
+          <input type="text" id="ministry-name" name="name" placeholder="Seu nome completo"
+                 value="{{ formData.name | default('') }}"
+                 class="{{ 'form__input--error' if errors.name else '' }}">
+          {% if errors.name %}<small class="form__error">{{ errors.name }}</small>{% endif %}
+        </div>
+
+        <div class="form__field">
+          <label for="ministry-phone">Telefone / WhatsApp <span class="form__req">*</span></label>
+          <input type="tel" id="ministry-phone" name="phone" placeholder="(31) 99999-9999"
+                 value="{{ formData.phone | default('') }}"
+                 class="{{ 'form__input--error' if errors.phone else '' }}">
+          {% if errors.phone %}<small class="form__error">{{ errors.phone }}</small>{% endif %}
+        </div>
+      </div>
+
+      <div class="form__field">
+        <label for="ministry-email">E-mail <span class="form__req">*</span></label>
+        <input type="email" id="ministry-email" name="email" placeholder="voce@email.com"
+               value="{{ formData.email | default('') }}"
+               class="{{ 'form__input--error' if errors.email else '' }}">
+        {% if errors.email %}<small class="form__error">{{ errors.email }}</small>{% endif %}
+      </div>
+
+      <div class="form__field">
+        <label for="ministry-message">Como você gostaria de participar? <span class="form__req">*</span></label>
+        <textarea id="ministry-message" name="message" rows="4"
+                  placeholder="Conte um pouco sobre você, sua disponibilidade e como gostaria de servir..."
+                  class="{{ 'form__input--error' if errors.message else '' }}">{{ formData.message | default('') }}</textarea>
+        {% if errors.message %}<small class="form__error">{{ errors.message }}</small>{% endif %}
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--block">
+        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+        Quero participar
+      </button>
+
+      <p class="form__note">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        Seus dados são usados apenas para falarmos sobre este ministério.
+      </p>
+    </form>
+  </div>
+</section>
+
 <section class="section">
   <div class="container">
     {% from "partials/section_heading.html" import section_heading %}

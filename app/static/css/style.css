@@ -2004,6 +2004,30 @@ h1, h2, h3, h4 {
   color: var(--muted-2);
 }
 
+.verse-of-day__actions {
+  display: flex;
+  margin-top: 1.2rem;
+}
+
+.btn--share {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.85rem;
+  background: var(--grad-accent);
+  color: var(--on-accent);
+  box-shadow: var(--shadow-accent);
+  border: none;
+  cursor: pointer;
+}
+
+.btn--share:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(233, 234, 236, 0.35);
+}
+
+.btn--share i {
+  font-size: 0.9rem;
+}
+
 /* ============================================================
    CONTATO
    ============================================================ */
@@ -2122,6 +2146,11 @@ h1, h2, h3, h4 {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1.15rem;
+}
+
+.form--narrow {
+  max-width: 680px;
+  margin-inline: auto;
 }
 
 .form__field {

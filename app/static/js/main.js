@@ -277,6 +277,227 @@
       .catch(function () {});
   });
 
+  /* ---------- Compartilhar versículo do dia (imagem com logo) ---------- */
+  (function () {
+    var shareBtn = doc.getElementById("share-verse");
+    var verseText = doc.getElementById("verse-of-day-text");
+    var verseRef = doc.getElementById("verse-of-day-ref");
+    if (!shareBtn || !verseText || !verseRef) return;
+
+    var IMG_W = 1080;
+    var IMG_H = 1350;
+    var PAD = 90;
+    var LOGO_PATH = "/static/images/logo-caminhar-white.png";
+    var LOGO_SIZE = 150;
+    var FONT = "Roboto, 'Segoe UI', system-ui, sans-serif";
+
+    function wrapLines(ctx, text, maxWidth) {
+      var words = text.split(/\s+/);
+      var lines = [];
+      var current = "";
+      for (var i = 0; i < words.length; i++) {
+        var candidate = current ? current + " " + words[i] : words[i];
+        if (ctx.measureText(candidate).width <= maxWidth || !current) {
+          current = candidate;
+        } else {
+          lines.push(current);
+          current = words[i];
+        }
+      }
+      if (current) lines.push(current);
+      return lines;
+    }
+
+    function loadLogo() {
+      return new Promise(function (resolve, reject) {
+        var img = new Image();
+        img.onload = function () {
+          resolve(img);
+        };
+        img.onerror = reject;
+        img.src = LOGO_PATH;
+      });
+    }
+
+    function buildImage(text, reference, logoImg) {
+      var canvas = doc.createElement("canvas");
+      canvas.width = IMG_W;
+      canvas.height = IMG_H;
+      var ctx = canvas.getContext("2d");
+      var cx = IMG_W / 2;
+
+      // fundo em gradiente (identidade escura da marca)
+      var bg = ctx.createLinearGradient(0, 0, IMG_W, IMG_H);
+      bg.addColorStop(0, "#0a0a0c");
+      bg.addColorStop(1, "#1b1b20");
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, IMG_W, IMG_H);
+
+      // brilho suave no topo
+      var glow = ctx.createRadialGradient(cx, -80, 0, cx, 0, 900);
+      glow.addColorStop(0, "rgba(233, 234, 236, 0.10)");
+      glow.addColorStop(1, "rgba(233, 234, 236, 0)");
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, IMG_W, IMG_H);
+
+      // moldura interna
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.14)";
+      ctx.lineWidth = 3;
+      ctx.strokeRect(
+        PAD - 24,
+        PAD - 24,
+        IMG_W - (PAD - 24) * 2,
+        IMG_H - (PAD - 24) * 2
+      );
+
+      // logo
+      ctx.drawImage(logoImg, cx - LOGO_SIZE / 2, 150, LOGO_SIZE, LOGO_SIZE);
+
+      // nome da igreja
+      ctx.textAlign = "center";
+      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = "#e9eaec";
+      ctx.font = "700 56px " + FONT;
+      ctx.letterSpacing = "14px";
+      ctx.fillText("IGREJA CAMINHAR", cx, 360);
+      ctx.letterSpacing = "0px";
+
+      // slogan
+      ctx.fillStyle = "#a6a8ae";
+      ctx.font = "500 28px " + FONT;
+      ctx.fillText("Andando juntos com propósito", cx, 404);
+
+      // divisor
+      ctx.strokeStyle = "rgba(233, 234, 236, 0.25)";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(cx - 60, 480);
+      ctx.lineTo(cx + 60, 480);
+      ctx.stroke();
+
+      // rótulo
+      ctx.fillStyle = "#7a7c84";
+      ctx.font = "700 32px " + FONT;
+      ctx.letterSpacing = "9px";
+      ctx.fillText("VERSÍCULO DO DIA", cx, 560);
+      ctx.letterSpacing = "0px";
+
+      // texto do versículo (com quebra de linha)
+      var maxTextWidth = IMG_W - PAD * 2;
+      var fontSize = text.length > 190 ? 40 : 46;
+      var lineHeight = Math.round(fontSize * 1.6);
+      ctx.fillStyle = "#f2f2f4";
+      ctx.font = "500 " + fontSize + "px " + FONT;
+      var lines = wrapLines(ctx, text, maxTextWidth);
+      if (lines.length > 9) {
+        lines = lines.slice(0, 9);
+        lines[lines.length - 1] = lines[lines.length - 1] + "...";
+      }
+      var y = 650;
+      for (var i = 0; i < lines.length; i++) {
+        ctx.fillText(lines[i], cx, y);
+        y += lineHeight;
+      }
+      y += 40;
+
+      // referência
+      ctx.fillStyle = "#e9eaec";
+      ctx.font = "700 42px " + FONT;
+      ctx.fillText("\u2014 " + reference, cx, y);
+
+      // rodapé
+      ctx.fillStyle = "#7a7c84";
+      ctx.font = "500 26px " + FONT;
+      ctx.fillText("Igreja Caminhar · Versículo do dia", cx, IMG_H - 70);
+
+      return canvas;
+    }
+
+    function canvasToBlob(canvas) {
+      return new Promise(function (resolve, reject) {
+        canvas.toBlob(function (blob) {
+          if (blob) resolve(blob);
+          else reject(new Error("Não foi possível gerar a imagem."));
+        }, "image/png");
+      });
+    }
+
+    function triggerDownload(blob) {
+      var url = URL.createObjectURL(blob);
+      var a = doc.createElement("a");
+      a.href = url;
+      a.download = "versiculo-do-dia.png";
+      doc.body.appendChild(a);
+      a.click();
+      doc.body.removeChild(a);
+      setTimeout(function () {
+        URL.revokeObjectURL(url);
+      }, 1000);
+    }
+
+    function fallbackShare(text, reference) {
+      var shareText =
+        "\u201C" + text + "\u201D \u2014 " + reference + " · Igreja Caminhar";
+      if (navigator.share) {
+        return navigator
+          .share({ title: "Versículo do dia — Igreja Caminhar", text: shareText })
+          .catch(function () {});
+      }
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText).catch(function () {});
+      }
+      return Promise.resolve();
+    }
+
+    shareBtn.addEventListener("click", function () {
+      var text = verseText.textContent.trim();
+      var reference = verseRef.textContent.trim();
+      if (!text) return;
+
+      shareBtn.disabled = true;
+
+      var fontsReady =
+        doc.fonts && doc.fonts.ready ? doc.fonts.ready : Promise.resolve();
+
+      fontsReady
+        .catch(function () {
+          return null;
+        })
+        .then(function () {
+          return loadLogo();
+        })
+        .then(function (logoImg) {
+          return canvasToBlob(buildImage(text, reference, logoImg));
+        })
+        .then(function (blob) {
+          var file = new File([blob], "versiculo-do-dia.png", {
+            type: "image/png",
+          });
+          var canShareFiles = false;
+          try {
+            canShareFiles =
+              navigator.canShare && navigator.canShare({ files: [file] });
+          } catch (e) {}
+          if (canShareFiles && navigator.share) {
+            return navigator.share({
+              title: "Versículo do dia — Igreja Caminhar",
+              text: "\u201C" + text + "\u201D \u2014 " + reference,
+              files: [file],
+            });
+          }
+          triggerDownload(blob);
+          return null;
+        })
+        .catch(function (err) {
+          if (err && err.name === "AbortError") return; // usuário cancelou
+          return fallbackShare(text, reference);
+        })
+        .then(function () {
+          shareBtn.disabled = false;
+        });
+    });
+  })();
+
   /* ---------- Auto-fechar avisos flash ---------- */
   var flashes = doc.querySelectorAll(".flash");
   if (flashes.length) {

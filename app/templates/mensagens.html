@@ -32,6 +32,12 @@
             <span id="verse-of-day-ref">{{ daily_verse.reference }}</span>
             <span class="verse-of-day__translation">{{ daily_verse.translation }}</span>
           </cite>
+          <div class="verse-of-day__actions">
+            <button type="button" class="btn btn--share" id="share-verse" aria-label="Compartilhar versículo do dia">
+              <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+              Compartilhar
+            </button>
+          </div>
         </div>
       </div>
     {% endif %}

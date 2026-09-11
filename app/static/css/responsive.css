@@ -295,6 +295,10 @@
     justify-content: center;
   }
 
+  .verse-of-day__actions {
+    justify-content: center;
+  }
+
   .contact-form-wrap {
     padding: 1.4rem;
   }

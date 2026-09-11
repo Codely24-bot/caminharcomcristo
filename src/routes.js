@@ -4,7 +4,7 @@ const crypto = require("crypto");
 
 const { SITE_CONFIG, whatsappLink } = require("./config");
 const { fetchPassage, randomVerse, verseOfDay } = require("./bible");
-const { dispatchContactMessage } = require("./contact");
+const { dispatchContactMessage, dispatchMinistryInterest } = require("./contact");
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 const PHONE_RE = /^[0-9()+.\-\s]{8,20}$/;
@@ -183,21 +183,99 @@ function installRoutes(app) {
     res.render("ministerios.html");
   });
 
-  app.get("/ministerios/:slug", (req, res) => {
-    const slug = (req.params.slug || "").toLowerCase();
+  function renderMinistryPage(req, res, slug, extra) {
     const ministry = SITE_CONFIG.ministries.find((m) => m.slug === slug);
     if (!ministry) {
       return res.status(404).render("404.html");
     }
-    res.render("ministerio.html", {
-      ministry,
-      other_ministries: SITE_CONFIG.ministries.filter((m) => m.slug !== slug),
-      seo_title: `${ministry.name} | Igreja Caminhar`,
-      seo_description: ministry.summary,
-      whatsapp_url: whatsappLink(
-        `Olá! Vim pelo site e gostaria de mais informações sobre o ministério de ${ministry.name}.`
-      ),
+    return res.render(
+      "ministerio.html",
+      Object.assign(
+        {
+          ministry,
+          other_ministries: SITE_CONFIG.ministries.filter((m) => m.slug !== slug),
+          seo_title: `${ministry.name} | Igreja Caminhar`,
+          seo_description: ministry.summary,
+          whatsapp_url: whatsappLink(
+            `Olá! Vim pelo site e gostaria de mais informações sobre o ministério de ${ministry.name}.`
+          ),
+        },
+        extra || {}
+      )
+    );
+  }
+
+  app.get("/ministerios/:slug", (req, res) => {
+    const slug = (req.params.slug || "").toLowerCase();
+    renderMinistryPage(req, res, slug, {
+      formData: {},
+      errors: {},
+      csrfToken: getCsrfToken(req),
     });
+  });
+
+  app.post("/ministerios/:slug", (req, res) => {
+    const slug = (req.params.slug || "").toLowerCase();
+    const csrfToken = getCsrfToken(req);
+    const body = req.body || {};
+
+    const formData = {
+      name: (body.name || "").toString().trim(),
+      phone: (body.phone || "").toString().trim(),
+      email: (body.email || "").toString().trim(),
+      message: (body.message || "").toString().trim(),
+    };
+
+    if (!validateCsrf(req, (body.csrf_token || "").toString())) {
+      return renderMinistryPage(req, res, slug, { formData, errors: {}, csrfToken });
+    }
+
+    const errors = {};
+
+    if (!formData.name) {
+      errors.name = "Informe seu nome.";
+    } else if (formData.name.length > 100) {
+      errors.name = "Nome muito longo (máx. 100 caracteres).";
+    }
+
+    const phone = formData.phone.replace(/\s+/g, "");
+    if (!phone) {
+      errors.phone = "Informe seu telefone para contato.";
+    } else if (!PHONE_RE.test(phone)) {
+      errors.phone = "Telefone inválido. Use apenas números (ex.: 31 99999-9999).";
+    }
+
+    if (!formData.email) {
+      errors.email = "Informe seu e-mail.";
+    } else if (!EMAIL_RE.test(formData.email)) {
+      errors.email = "E-mail inválido. Confira o endereço digitado.";
+    }
+
+    if (!formData.message) {
+      errors.message = "Conte como você gostaria de participar.";
+    } else if (formData.message.length > 2000) {
+      errors.message = "Mensagem muito longa (máx. 2000 caracteres).";
+    }
+
+    if (Object.keys(errors).length) {
+      return renderMinistryPage(req, res, slug, { formData, errors, csrfToken });
+    }
+
+    const ministry = SITE_CONFIG.ministries.find((m) => m.slug === slug);
+    dispatchMinistryInterest({
+      name: formData.name,
+      email: formData.email,
+      phone,
+      message: formData.message,
+      ministry: ministry.name,
+    });
+
+    setFlash(
+      res,
+      "success",
+      `Inscrição recebida! Em breve entraremos em contato sobre o ministério ${ministry.name}.`
+    );
+    return res.redirect(`/ministerios/${slug}?interesse=1#form`);
   });
 
   app.get("/cultos", (_req, res) => {
