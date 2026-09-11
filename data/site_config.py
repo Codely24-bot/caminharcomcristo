@@ -210,7 +210,7 @@ SITE_CONFIG = {
         {
             "title": "Caminhos que Afloram no Deserto",
             "date": "25/08/2026",
-            "speaker": "Pr. Davi Santos",
+            "speaker": "Pr. Júnior",
             "reference": "Isaías 43.19",
             "duration": "42 min",
             "tag": "Palavra",
@@ -220,7 +220,7 @@ SITE_CONFIG = {
         {
             "title": "O Poder de uma Vida em Comunhão",
             "date": "18/08/2026",
-            "speaker": "Pr. Débora Rocha",
+            "speaker": "Pr. Júnior",
             "reference": "Atos 2.42-47",
             "duration": "38 min",
             "tag": "Comunhão",
@@ -230,7 +230,7 @@ SITE_CONFIG = {
         {
             "title": "Adorar no Meio da Luta",
             "date": "11/08/2026",
-            "speaker": "Pr. Davi Santos",
+            "speaker": "Pr. Júnior",
             "reference": "Salmos 34.1-4",
             "duration": "45 min",
             "tag": "Adoração",
@@ -240,7 +240,7 @@ SITE_CONFIG = {
         {
             "title": "Construindo Famílias que Permanecem",
             "date": "04/08/2026",
-            "speaker": "Pra. Larissa Andrade",
+            "speaker": "Pr. Júnior",
             "reference": "Josué 24.15",
             "duration": "40 min",
             "tag": "Família",
@@ -250,7 +250,7 @@ SITE_CONFIG = {
         {
             "title": "Quando o Sonho Parece Demorar",
             "date": "28/07/2026",
-            "speaker": "Pr. Davi Santos",
+            "speaker": "Pr. Júnior",
             "reference": "Gênesis 39.19-23",
             "duration": "36 min",
             "tag": "Esperança",
